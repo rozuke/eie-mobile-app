@@ -1,30 +1,37 @@
+import 'package:eie_mobile_app/src/widgets/custom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
+
+
+class HomeScreen extends StatefulWidget {
    static String nameRoute = 'home';
   const HomeScreen({Key? key}) : super(key: key);
-  
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
+      appBar: const CustomAppBar(),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              width: 40,
-              height: 40,
-              child: Image.asset('assets/logos/eie-logo.png'),
-            ),
-            const Text('Books')
-
+          const SizedBox(height: 50,),
+          const Divider(height: 0,),
+          _LevelBook(),
+          const Divider(height: 0,),
+          _LevelBook(),
+          const Divider(height: 0,),
+          _LevelBook(),
+          const Divider(height: 0,),
           ],
         ),
-        elevation: 0,
       ),
-      body: const Center(
-        // child: _ListViewBooks(),
-      )
+      bottomNavigationBar: CustomNavigationBar(),
     );
   }
 }
@@ -36,26 +43,54 @@ class _ListViewBooks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lessons = ['The classroom', 'Bob\'s a barber', 'Is he teacher?', 'Today is Thursday'];
-    return ListView(
-
+    const List<Book> books = [
+      Book(name: 'Book 1', lessons: ['The classroom', 'Bob\'s a barber', 'Is he a teacher?','Today is Thursday'], icon: Icons.looks_one_rounded),
+      Book(name: 'Book 2', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_two_rounded),
+      Book(name: 'Book 3', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_3_rounded),
+      Book(name: 'Book 4', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_4_rounded),
+      Book(name: 'Book 5', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_5_rounded),
+      Book(name: 'Book 6', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_6_rounded)
+    ];
+    
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemCount: books.length,
+      itemBuilder: (BuildContext context, int index) {
+        final book = books[index];
+        return ListTile(
+          leading: Icon(book.icon, size: 50, color: Color(0xffA08E27),),
+            title: Text(book.name),
+            subtitle: Text(book.lessons.join(', ')),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Color(0xff40594D),)
+        );
+      },
     );
   }
 }
 
+class Book {
+  final String name;
+  final List<String> lessons;
+  final IconData icon;
 
+  const Book({
+    required this.name,
+    required this.lessons,
+    required this.icon,
+  });
+}
 
 class Item {
   
   Item({
     required this.id,
     required this.expandedValue,
-    required this.headerValue
   });
 
   int id;
   String expandedValue;
-  String headerValue;
 }
 
 List<Item> generateItems(int numberOfItems) {
@@ -63,56 +98,21 @@ List<Item> generateItems(int numberOfItems) {
     return Item(
       id: index,
       expandedValue: 'Book $index',
-      headerValue: 'Header $index'
     );
   });
 }
 
-class Listview1Screen extends StatelessWidget {
-  final options = const [
-    'Megaman',
-    'Metal Gear',
-    'Super Smash',
-    'Final Fantasy'
-  ];
-  const Listview1Screen({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Listview Tipo 1"),
-      ),
-      body: ListView(
-        children: [
-//iteracion
-          ...options
-              .map((game) => ListTile(
-                    title: Text(game),
-                    trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                  ))
-              .toList()
-        ],
-      ),
-    );
-  }
-}
-
-class _LevelBook extends StatelessWidget {
-  const _LevelBook({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    MediaQueryData queryData;
-    queryData = MediaQuery.of(context);
-    return Container(
-      width: queryData.size.width * 0.9,
-      height: 100,
-      color: Colors.red,
-
-
-    );
-  }
+Widget _LevelBook() {
+  List<Item> _data = generateItems(1);
+  return const ExpansionTile(
+    collapsedBackgroundColor: Colors.white,
+    backgroundColor: Colors.white,
+    leading: Icon(Icons.star_outlined, color: Color(0xffFFC300), size: 30 ),
+    title: Text('Level 1: Basic', style: TextStyle(fontSize: 18),),
+    children: [
+     _ListViewBooks()
+    ],
+  );
+  
 }
