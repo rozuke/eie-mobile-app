@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/screens/exercise_type_h1.dart';
 import 'package:eie_mobile_app/src/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.nameRoute,
+      initialRoute: ExcerciseTypeH1Screen.nameRoute,
       themeMode: ThemeMode.light,
       routes: {
         HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
+        ExcerciseTypeH1Screen.nameRoute: ( _ ) => const ExcerciseTypeH1Screen(),
       },
     );
   }

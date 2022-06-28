@@ -1,4 +1,3 @@
-import 'package:eie_mobile_app/src/widgets/custom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
