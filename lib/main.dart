@@ -10,12 +10,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: ExerciseTypeEE1Screen.nameRoute,
+      initialRoute: LoginScreen.nameRoute,
       themeMode: ThemeMode.light,
       routes: {
         HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
         ExerciseTypeH1Screen.nameRoute: ( _ ) => const ExerciseTypeH1Screen(),
         ExerciseTypeEE1Screen.nameRoute: ( _ ) => const ExerciseTypeEE1Screen(),
+        LoginScreen.nameRoute: ( _ ) => const LoginScreen(),
       },
     );
   }
