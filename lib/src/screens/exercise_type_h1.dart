@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
-class ExcerciseTypeH1Screen extends StatelessWidget {
+class ExerciseTypeH1Screen extends StatelessWidget {
   static String nameRoute = 'excercise_type_h1';
-  const ExcerciseTypeH1Screen({Key? key}) : super(key: key);
+  const ExerciseTypeH1Screen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
