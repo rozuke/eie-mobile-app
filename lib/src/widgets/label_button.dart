@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class LabelButton extends StatelessWidget {
@@ -8,8 +9,8 @@ class LabelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: const Color(0xff56AFDE),
-        minimumSize: Size(150, 70),
+        primary: ThemeApp.secondaryBlueColor,
+        minimumSize: const Size(180, 70),
         // padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 20),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)

@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/screens/launcher_temp.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
 
@@ -8,16 +9,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginScreen.nameRoute,
-      themeMode: ThemeMode.light,
-      routes: {
-        HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
-        ExerciseTypeH1Screen.nameRoute: ( _ ) => const ExerciseTypeH1Screen(),
-        ExerciseTypeEE1Screen.nameRoute: ( _ ) => const ExerciseTypeEE1Screen(),
-        LoginScreen.nameRoute: ( _ ) => const LoginScreen(),
-      },
+      home: LauncherTemp(),
+      // initialRoute: LoginScreen.nameRoute,
+      // routes: {
+      //   HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
+      //   ExerciseTypeH1Screen.nameRoute: ( _ ) => const ExerciseTypeH1Screen(),
+      //   ExerciseTypeEE1Screen.nameRoute: ( _ ) => const ExerciseTypeEE1Screen(),
+      //   LoginScreen.nameRoute: ( _ ) => const LoginScreen(),
+      // },
     );
   }
 }

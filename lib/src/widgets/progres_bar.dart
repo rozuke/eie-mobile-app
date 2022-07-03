@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -26,10 +27,10 @@ class ProgresBar extends StatelessWidget {
             lineHeight: 20.0,
             barRadius: const Radius.circular(9),
             percent: 0.2,
-            backgroundColor: const Color(0xffB6D4E7),
-            progressColor: const Color(0xff003566),
+            backgroundColor: ThemeApp.lightBlueColor,
+            progressColor: ThemeApp.primaryBlueColor,
           ),
-          const Icon(Icons.flag_rounded, color: Color(0xffFFCD05), size: 30)
+          const Icon(Icons.flag_rounded, color: ThemeApp.secondaryYellowColor, size: 30)
             ],
           )
         ],

@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/widgets.dart';
@@ -8,6 +9,7 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -28,7 +30,7 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
                     height: 50,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffB6D4E7),
+                      color: ThemeApp.lightBlueColor,
                     ),
                   ),
                   _FormatText(text: 'the wrong answer on a test'),
@@ -44,10 +46,14 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
               LabelButton(text: 'to mark'),
             ]
           ),
-          const Align(
-              alignment: Alignment(0.0, 0.94),
-              child: CustomELevatedButton(text: 'Continue')
-            )
+          Container(
+          margin: EdgeInsets.only(bottom: 30),
+          child: Align(
+                  alignment: Alignment.bottomCenter,
+                  
+                  child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,)
+                ),
+        )
         ],
       ),
     );
@@ -69,7 +75,7 @@ class _FormatText extends StatelessWidget {
         shadows: [Shadow(color: Colors.black, offset: Offset(0, -5))],
         color: Colors.transparent,
         decoration: TextDecoration.underline,
-        decorationColor: Color(0xffA08E27),
+        decorationColor: ThemeApp.complementaryColor,
         decorationThickness: 3,
         decorationStyle: TextDecorationStyle.dashed,
         fontSize: 18

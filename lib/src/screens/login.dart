@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
@@ -8,17 +9,16 @@ class LoginScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 500),
-            child: Center(
+            margin: const EdgeInsets.only(top: 500),
+            child: const Center(
               child: _LoginForm()
             )
           ),
-          Expanded(
+          const Expanded(
             child: HeaderCircular(),
           ),
           
@@ -50,7 +50,7 @@ class _LoginForm extends StatelessWidget {
                 prefixIcon: Icons.person)
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 60),
           SizedBox(
             width: width * 0.8,
             child: TextFormField(
@@ -61,8 +61,8 @@ class _LoginForm extends StatelessWidget {
                 prefixIcon: Icons.lock)
             ),
           ),
-          const SizedBox(height: 40),
-          const CustomELevatedButton(text: 'Login'),
+          const SizedBox(height: 60),
+          CustomELevatedButton(text: 'Login',height: 60, width: width * 0.8, ),
         ]
       ),
     );
@@ -75,24 +75,22 @@ class InputDecorations {
     IconData? prefixIcon
   }){
     return InputDecoration(
+      border: UnderlineInputBorder(
+        borderRadius: BorderRadius.circular(30)
+      ),
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
-          color: Color(0xffFFCD05),
+          color: ThemeApp.primaryYellowColor,
           width: 2,
         )
       ),
-      focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: Color(0xffFFCD05),
-          width: 2,
-        )
-      ),
+     
       hintText: hintText,
-      hintStyle: TextStyle(
-        color: Color(0xffB6D4E7),
+      hintStyle: const TextStyle(
+        color: ThemeApp.lightBlueColor,
         ),
       prefixIcon: prefixIcon != null 
-        ?Icon(prefixIcon, color: Color(0xFF003566))
+        ?Icon(prefixIcon, color: ThemeApp.primaryBlueColor,)
         :null,
       filled: true,
       fillColor: Colors.white
@@ -135,7 +133,7 @@ class _HeaderCicular extends CustomPainter{
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = Color(0xFF003566);
+    paint.color = ThemeApp.primaryBlueColor;
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 20;
 

@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatelessWidget {
@@ -12,7 +13,7 @@ class CustomNavigationBar extends StatelessWidget {
       ],
       // backgroundColor: Colors.white
       currentIndex: 0,
-      backgroundColor: const Color(0xFF003566),
-      selectedItemColor: const Color(0xffFFC300));
+      backgroundColor: ThemeApp.primaryBlueColor,
+      selectedItemColor: ThemeApp.primaryYellowColor);
   }
 }

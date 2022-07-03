@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+import 'package:eie_mobile_app/src/theme/theme.dart';
+
 class CustomAppBar extends StatelessWidget
   implements PreferredSizeWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -21,7 +24,7 @@ class CustomAppBar extends StatelessWidget
           ],
         ),
         elevation: 0,
-        backgroundColor: Color(0xFF003566),
+        backgroundColor: ThemeApp.primaryBlueColor,
     );
   }
 }

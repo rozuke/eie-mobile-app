@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
@@ -59,10 +60,10 @@ class _ListViewBooks extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final book = books[index];
         return ListTile(
-          leading: Icon(book.icon, size: 50, color: Color(0xffA08E27),),
+          leading: Icon(book.icon, size: 50, color: ThemeApp.complementaryColor,),
             title: Text(book.name),
             subtitle: Text(book.lessons.join(', ')),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: Color(0xff40594D),)
+            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
         );
       },
     );
@@ -107,7 +108,7 @@ Widget _LevelBook() {
   return const ExpansionTile(
     collapsedBackgroundColor: Colors.white,
     backgroundColor: Colors.white,
-    leading: Icon(Icons.star_outlined, color: Color(0xffFFC300), size: 30 ),
+    leading: Icon(Icons.star_outlined, color: ThemeApp.secondaryYellowColor, size: 30 ),
     title: Text('Level 1: Basic', style: TextStyle(fontSize: 18),),
     children: [
      _ListViewBooks()
