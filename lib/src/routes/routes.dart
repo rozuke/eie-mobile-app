@@ -1,5 +1,5 @@
-import 'package:eie_mobile_app/src/screens/exercise_type_ee2.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import 'package:eie_mobile_app/src/screens/screens.dart';
 
 
@@ -9,6 +9,7 @@ final pageRoutes = <_Route> [
   _Route('Exercise Homework 1', const ExerciseTypeH1Screen()),
   _Route('Exercise EE 1', const ExerciseTypeEE1Screen()),
   _Route('Exercise EE 2', const ExerciseTypeEE2Screen()),
+  _Route('Exercise Laboratroy 1', const ExerciseLaboratory1Screen()),
 ];
 
 class _Route {

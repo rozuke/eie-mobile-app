@@ -34,11 +34,11 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
                 ),
 
               SizedBox(height: 50),
-              LabelButton(text: 'It was the teacher'),
+              LabelButton(text: 'It was the teacher', isAdjustable: false),
               SizedBox(height: 20),
-              LabelButton(text: 'It\'s was the teacher'),
+              LabelButton(text: 'It\'s was the teacher', isAdjustable: false,),
               SizedBox(height: 20),
-              LabelButton(text: 'There is she is'),
+              LabelButton(text: 'There is she is', isAdjustable: false,),
 
              ],
           ),

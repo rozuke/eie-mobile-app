@@ -39,11 +39,11 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
               ),
               
               SizedBox(height: 150),
-              LabelButton(text: 'mark'),
+              LabelButton(text: 'mark', isAdjustable: false, ),
               SizedBox(height: 15),
-              LabelButton(text: 'marks'),
+              LabelButton(text: 'marks', isAdjustable: false,),
               SizedBox(height: 15),
-              LabelButton(text: 'to mark'),
+              LabelButton(text: 'to mark', isAdjustable: false,),
             ]
           ),
           Container(

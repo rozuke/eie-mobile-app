@@ -13,7 +13,7 @@ class ExerciseTypeH1Screen extends StatelessWidget {
       body: Stack(
         children: [
           Column(
-          children: [
+          children: const [
             SafeArea(child: ProgresBar()),
             SizedBox(height: 30),
             Text('Select the rigth picture', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
