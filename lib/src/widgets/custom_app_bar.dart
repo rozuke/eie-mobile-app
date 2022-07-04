@@ -4,7 +4,8 @@ import 'package:eie_mobile_app/src/theme/theme.dart';
 
 class CustomAppBar extends StatelessWidget
   implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  final String title;
+  const CustomAppBar({Key? key, required this.title}) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -20,7 +21,7 @@ class CustomAppBar extends StatelessWidget
               height: 40,
               child: Image.asset('assets/logos/eie-logo.png'),
             ),
-            const Text('Books')
+            Text(title)
           ],
         ),
         elevation: 0,
