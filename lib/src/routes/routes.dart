@@ -10,6 +10,8 @@ final pageRoutes = <_Route> [
   _Route('Exercise EE 1', const ExerciseTypeEE1Screen()),
   _Route('Exercise EE 2', const ExerciseTypeEE2Screen()),
   _Route('Exercise Laboratroy 1', const ExerciseLaboratory1Screen()),
+  _Route('Exercise Laboratory 2', const ExerciseLaboratory2Screen()),
+  _Route('Question Summary', const QuestionSummaryScreen()),
 ];
 
 class _Route {
