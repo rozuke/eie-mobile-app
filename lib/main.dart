@@ -1,5 +1,6 @@
-import 'package:eie_mobile_app/src/screens/home_screen.dart';
+import 'package:eie_mobile_app/src/screens/launcher_temp.dart';
 import 'package:flutter/material.dart';
+import 'package:eie_mobile_app/src/screens/screens.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,12 +9,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.nameRoute,
-      routes: {
-        HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
-      },
+      home: LauncherTemp(),
+      // initialRoute: LoginScreen.nameRoute,
+      // routes: {
+      //   HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
+      //   ExerciseTypeH1Screen.nameRoute: ( _ ) => const ExerciseTypeH1Screen(),
+      //   ExerciseTypeEE1Screen.nameRoute: ( _ ) => const ExerciseTypeEE1Screen(),
+      //   LoginScreen.nameRoute: ( _ ) => const LoginScreen(),
+      // },
     );
   }
 }
