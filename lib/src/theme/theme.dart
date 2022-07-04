@@ -10,4 +10,11 @@ class ThemeApp {
   static const Color lightBlueColor = Color(0xffB6D4E7);
   
 
+  static final ThemeData customLightTheme = ThemeData.light().copyWith(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      unselectedItemColor: Colors.white,
+      
+    )
+  );
+
 }

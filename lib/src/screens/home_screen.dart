@@ -1,118 +1,82 @@
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:eie_mobile_app/src/widgets/widgets.dart';
+import 'package:eie_mobile_app/src/screens/screens.dart';
+import 'package:provider/provider.dart';
 
-
-
-class HomeScreen extends StatefulWidget {
-   static String nameRoute = 'home';
+class HomeScreen extends StatelessWidget {
+   
   const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(title: 'Books'),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-          const SizedBox(height: 50,),
-          const Divider(height: 0,),
-          _LevelBook(),
-          const Divider(height: 0,),
-          _LevelBook(),
-          const Divider(height: 0,),
-          _LevelBook(),
-          const Divider(height: 0,),
-          ],
-        ),
+    return ChangeNotifierProvider(
+      create: ( _ ) => _NavegationModel(),
+      child: Scaffold(
+        body: _PagesHome(),
+        bottomNavigationBar: _BottomNavBar(),
       ),
-      bottomNavigationBar: CustomNavigationBar(),
     );
   }
 }
 
-class _ListViewBooks extends StatelessWidget {
-  const _ListViewBooks({
+class _BottomNavBar extends StatelessWidget {
+  const _BottomNavBar({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const List<Book> books = [
-      Book(name: 'Book 1', lessons: ['The classroom', 'Bob\'s a barber', 'Is he a teacher?','Today is Thursday'], icon: Icons.looks_one_rounded),
-      Book(name: 'Book 2', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_two_rounded),
-      Book(name: 'Book 3', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_3_rounded),
-      Book(name: 'Book 4', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_4_rounded),
-      Book(name: 'Book 5', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_5_rounded),
-      Book(name: 'Book 6', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_6_rounded)
-    ];
-    
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      itemCount: books.length,
-      itemBuilder: (BuildContext context, int index) {
-        final book = books[index];
-        return ListTile(
-          leading: Icon(book.icon, size: 50, color: ThemeApp.complementaryColor,),
-            title: Text(book.name),
-            subtitle: Text(book.lessons.join(', ')),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
-        );
-      },
+
+    final navigationModel = Provider.of<_NavegationModel>(context);
+    return BottomNavigationBar(
+      currentIndex: navigationModel.currentPage,
+      onTap: (i) => navigationModel.currentPage = i,
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.library_books, size: 30,), label: 'Books', backgroundColor: Colors.white),
+        BottomNavigationBarItem(icon: Icon(Icons.grid_view_sharp, size: 30), label: 'Activities', backgroundColor: Colors.white),
+        BottomNavigationBarItem(icon: Icon(Icons.person, size: 30), label: 'Profile'),
+      ],
+      // backgroundColor: Colors.white
+      backgroundColor: ThemeApp.primaryBlueColor,
+      selectedItemColor: ThemeApp.primaryYellowColor);
+  }
+}
+
+
+
+class _PagesHome extends StatelessWidget {
+  const _PagesHome({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    final navigationModel = Provider.of<_NavegationModel>(context);
+    return PageView(
+      controller: navigationModel.pageController,
+      physics: NeverScrollableScrollPhysics(),
+      children: [
+        BooksScreen(),
+        ActivitiesScreen()
+      ],
     );
   }
 }
 
-class Book {
-  final String name;
-  final List<String> lessons;
-  final IconData icon;
 
-  const Book({
-    required this.name,
-    required this.lessons,
-    required this.icon,
-  });
-}
+class _NavegationModel with ChangeNotifier {
+  int _currentPage = 0;
+  PageController _pageController = new PageController();
+  int get currentPage => _currentPage;
 
-class Item {
-  
-  Item({
-    required this.id,
-    required this.expandedValue,
-  });
+  set currentPage(int value) {
+    _currentPage = value;
 
-  int id;
-  String expandedValue;
-}
+    _pageController.animateToPage(value, duration: Duration(milliseconds: 250), curve: Curves.easeInOut);
 
-List<Item> generateItems(int numberOfItems) {
-  return List<Item>.generate(numberOfItems, (int index) {
-    return Item(
-      id: index,
-      expandedValue: 'Book $index',
-    );
-  });
-}
+    notifyListeners();
+  }
 
-
-Widget _LevelBook() {
-  List<Item> _data = generateItems(1);
-  return const ExpansionTile(
-    collapsedBackgroundColor: Colors.white,
-    backgroundColor: Colors.white,
-    leading: Icon(Icons.star_outlined, color: ThemeApp.secondaryYellowColor, size: 30 ),
-    title: Text('Level 1: Basic', style: TextStyle(fontSize: 18),),
-    children: [
-     _ListViewBooks()
-    ],
-  );
-  
+  PageController get pageController => _pageController;
 }

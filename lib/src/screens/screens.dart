@@ -1,3 +1,5 @@
+export 'package:eie_mobile_app/src/screens/activities_screen.dart';
+export 'package:eie_mobile_app/src/screens/books_screen.dart';
 export 'package:eie_mobile_app/src/screens/exercise_type_ee1.dart';
 export 'package:eie_mobile_app/src/screens/exercise_type_ee2.dart';
 export 'package:eie_mobile_app/src/screens/exercise_type_h1.dart';

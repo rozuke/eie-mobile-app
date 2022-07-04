@@ -1,4 +1,6 @@
 import 'package:eie_mobile_app/src/screens/launcher_temp.dart';
+import 'package:eie_mobile_app/src/theme/theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
 
@@ -9,9 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LauncherTemp(),
+      theme: ThemeApp.customLightTheme,
       // initialRoute: LoginScreen.nameRoute,
       // routes: {
       //   HomeScreen.nameRoute: ( _ ) => const HomeScreen(),
