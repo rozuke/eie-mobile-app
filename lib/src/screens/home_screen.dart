@@ -58,7 +58,8 @@ class _PagesHome extends StatelessWidget {
       physics: NeverScrollableScrollPhysics(),
       children: [
         BooksScreen(),
-        ActivitiesScreen()
+        ActivitiesScreen(),
+        ProfileScreen(),
       ],
     );
   }
