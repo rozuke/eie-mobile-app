@@ -32,9 +32,9 @@ class _BottomNavBar extends StatelessWidget {
       currentIndex: navigationModel.currentPage,
       onTap: (i) => navigationModel.currentPage = i,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.library_books, size: 30,), label: 'Books', backgroundColor: Colors.white),
-        BottomNavigationBarItem(icon: Icon(Icons.grid_view_sharp, size: 30), label: 'Activities', backgroundColor: Colors.white),
-        BottomNavigationBarItem(icon: Icon(Icons.person, size: 30), label: 'Profile'),
+        BottomNavigationBarItem(icon: Icon(Icons.library_books, size: 25,), label: 'Books', backgroundColor: Colors.white),
+        BottomNavigationBarItem(icon: Icon(Icons.grid_view_sharp, size: 25), label: 'Activities', backgroundColor: Colors.white),
+        BottomNavigationBarItem(icon: Icon(Icons.person, size: 25), label: 'Profile'),
       ],
       // backgroundColor: Colors.white
       backgroundColor: ThemeApp.primaryBlueColor,

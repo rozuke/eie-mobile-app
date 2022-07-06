@@ -17,11 +17,11 @@ class CustomAppBar extends StatelessWidget
           children: [
             Container(
               margin: const EdgeInsets.only(right: 10),
-              width: 40,
-              height: 40,
+              width: 35,
+              height: 35,
               child: Image.asset('assets/logos/eie-logo.png'),
             ),
-            Text(title)
+            Text(title,style: TextStyle(fontWeight: FontWeight.w400),)
           ],
         ),
         elevation: 0,

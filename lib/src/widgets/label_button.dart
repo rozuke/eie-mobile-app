@@ -9,7 +9,7 @@ class LabelButton extends StatelessWidget {
   const LabelButton({Key? key,
     required this.text,
     required this.isAdjustable,
-    this.height = 70,
+    this.height = 60,
     this.width = 180}) : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class LabelButton extends StatelessWidget {
         
       ),
       onPressed: () {},
-      child: Text(text, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),),
+      child: Text(text, style: TextStyle(fontWeight: FontWeight.w500),),
     );
   }
 }

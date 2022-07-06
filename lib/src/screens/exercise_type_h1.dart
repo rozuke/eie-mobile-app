@@ -10,29 +10,26 @@ class ExerciseTypeH1Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Stack(
+      body: Column(
+      
         children: [
-          Column(
-          children: const [
-            SafeArea(child: ProgresBar()),
-            SizedBox(height: 30),
-            Text('Select the rigth picture', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
-            SizedBox(height: 20),
-            _FormatText(text: 'This is a pencil',),
-            Padding(
-              padding: EdgeInsets.only(top: 80),
-              child: ImageGrid(),
+              Column(
+              children: const [
+                SafeArea(child: ProgresBar()),
+                SizedBox(height: 30),
+                Text('Select the rigth picture', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                SizedBox(height: 20),
+                _FormatText(text: 'This is a pencil',),
+                SizedBox(height: 40),
+                ImageGrid(spaceElements: 40,),
+                
+              ],
             ),
-          ],
-        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 30),
-          child: Align(
-                  alignment: Alignment.bottomCenter,
-                  
-                  child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,)
-                ),
-        )
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30),
+              child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,),
+            )
         ],
       ),
     );

@@ -18,7 +18,7 @@ class ActivitiesScreen extends StatelessWidget {
               children: [
                 SizedBox(width: 20),
                 Icon(Icons.list_alt_outlined, color: ThemeApp.primaryYellowColor, size: 40),
-                Text('Basic level course', style: TextStyle(fontSize: 18),)
+                Text('Basic level course', style: TextStyle(fontSize: 16),)
               ],
             ),
             _BooksChanel()
@@ -46,7 +46,7 @@ class _BooksChanel extends StatelessWidget {
       Chanel(title: 'B6', name: 'Book 6 activities'),
       Chanel(title: 'B6', name: 'Book 6 activities'),
     ];
-    int iteration = (chanels.length / 2).round();
+    
       return GridView.builder(
         shrinkWrap: true,
         primary: false,
@@ -75,11 +75,14 @@ class _CardChanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    const double size = 150;
+    
     return GestureDetector(
       onTap: (){},
       child: Container(
-        height:150,
-        width: 150,
+        height: size,
+        width: size,
         decoration: BoxDecoration(
           color: ThemeApp.lightBlueColor,
           borderRadius: BorderRadius.circular(10),
@@ -87,17 +90,18 @@ class _CardChanel extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Container(
-                alignment: Alignment.center,
+            Container(
+              height: size * 0.7,
+              width: size * 0.7,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
                 color: ThemeApp.secondaryBlueColor,
-                height: 130,
-                width: 130,
-                child: Text(title, style: TextStyle(fontSize: 26, color: Colors.white)),
+                borderRadius: BorderRadius.circular(10)
               ),
+              
+              child: Text(title, style: TextStyle(fontSize: 24, color: Colors.white)),
             ),
-            Text(name, style: TextStyle(fontSize: 18))
+            Text(name, style: TextStyle(fontSize: 14))
           ],
         )
       ),

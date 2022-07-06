@@ -14,7 +14,7 @@ class ProgresBar extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 40, left: 10),
+            padding: const EdgeInsets.only(right: 20, left: 20),
             child: IconButton(
               onPressed: (){} ,
               icon: const Icon(Icons.close, size: 35,)),
@@ -24,7 +24,7 @@ class ProgresBar extends StatelessWidget {
               const Icon(Icons.flag_outlined, size: 30,),
           LinearPercentIndicator(
             width: barSize,
-            lineHeight: 20.0,
+            lineHeight: 16.0,
             barRadius: const Radius.circular(9),
             percent: 0.2,
             backgroundColor: ThemeApp.lightBlueColor,

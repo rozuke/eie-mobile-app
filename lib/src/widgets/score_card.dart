@@ -19,7 +19,8 @@ class ScoreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    var width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
+    final size = width * 0.12;
     return Container(
       
       child: Row(
@@ -28,13 +29,13 @@ class ScoreCard extends StatelessWidget {
         children: [
           
           Container(
-            width: 80,
-            height: 80,
+            width: size,
+            height: size,
             decoration: BoxDecoration(
               color: color,
               borderRadius: BorderRadius.circular(10)
             ),
-            child: Icon(icon, color: Colors.white, size: 50,),
+            child: Icon(icon, color: Colors.white, size: 40,),
           ),
 
           Column(
@@ -45,8 +46,8 @@ class ScoreCard extends StatelessWidget {
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                    Text( title, style: TextStyle(fontSize: 20)),
-                    Text('$score', style: TextStyle(fontSize: 20, color: ThemeApp.secondaryBlueColor),)
+                    Text( title, style: TextStyle(fontSize: 16)),
+                    Text('$score', style: TextStyle(fontSize: 16, color: ThemeApp.secondaryBlueColor),)
                     
                   ],
                 ),
@@ -54,7 +55,7 @@ class ScoreCard extends StatelessWidget {
               SizedBox(height: 5,),
               LinearPercentIndicator(
                 width: width * 0.65,
-                lineHeight: 15,
+                lineHeight: 12,
                 barRadius: const Radius.circular(9),
                 percent: percentage,
                 backgroundColor: ThemeApp.lightBlueColor,

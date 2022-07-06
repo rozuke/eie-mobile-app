@@ -10,16 +10,12 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-             children: const [
-              SafeArea(
-                child: ProgresBar(),
-              ),
-              SizedBox(height: 30),
-              Text('Complete the dialog', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
-              SizedBox(height: 50),
+          SafeArea( child: ProgresBar()),
+          SizedBox(height: 30),
+          Text('Complete the dialog', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+          SizedBox(height: 30),
               Align(
                 alignment: Alignment.centerLeft,
                 child: _BoxMeessage(
@@ -33,22 +29,18 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
                   message: ''),   
                 ),
 
-              SizedBox(height: 50),
+              SizedBox(height: 20),
               LabelButton(text: 'It was the teacher', isAdjustable: false),
               SizedBox(height: 20),
               LabelButton(text: 'It\'s was the teacher', isAdjustable: false,),
               SizedBox(height: 20),
               LabelButton(text: 'There is she is', isAdjustable: false,),
-
-             ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 30),
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,)
-            ),
-        )
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,),
+              )
+            
         ],
       ),
     );
@@ -72,12 +64,12 @@ class _BoxMeessage extends StatelessWidget {
         SvgPicture.asset(isLeft 
           ?'assets/box-message-left.svg'
           :'assets/box-message-right.svg'
-        , height: isLeft? 220: 180),
+        , height: isLeft? 160: 130),
 
         Container(
-          padding: const EdgeInsets.only(top: 40, left: 80),
-          width: 250,
-          child: Text(message, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),)
+          padding: const EdgeInsets.only(top: 20, left: 40),
+          width: 150,
+          child: Text(message, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),)
         )
       ],
     );
