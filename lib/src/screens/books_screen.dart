@@ -60,9 +60,9 @@ class _ListViewBooks extends StatelessWidget {
         final book = books[index];
         return ListTile(
           leading: Icon(book.icon, size: 50, color: ThemeApp.complementaryColor,),
-            title: Text(book.name),
-            subtitle: Text(book.lessons.join(', ')),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
+          title: Text(book.name),
+          subtitle: Text(book.lessons.join(', ')),
+          trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
         );
       },
     );

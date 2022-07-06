@@ -65,7 +65,7 @@ class _BoxInfo extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(8)
-      ),
+      ),  
       child: Column(
         
         children: [

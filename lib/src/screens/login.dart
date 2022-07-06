@@ -12,29 +12,33 @@ class LoginScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: height * 0.45,
-              child: HeaderCircular()
-            ),
-            SizedBox(height: 30),
-            const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            SizedBox(height: 30),
-            Form(
-              child: Column(
-                children: [
-                  _CustomInputForm(hintText: 'Email', inputType: TextInputType.emailAddress, prefixIcon: Icons.person, isHidden: false,),
-                  SizedBox(height: 50),
-                  _CustomInputForm(hintText: 'Password', inputType: TextInputType.text, prefixIcon: Icons.lock, isHidden: true,),
-                  SizedBox(height: 50),
-                  CustomELevatedButton(text: 'Login', width: width * 0.8, height: 50 )
-                ],
+        child: ListView(
+          children: 
+          [Column(
+            children: [
+              SizedBox(
+                height: height * 0.45,
+                child: HeaderCircular()
+              ),
+              SizedBox(height: 30),
+              const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 30),
+              Form(
+                child: Column(
+                  children: [
+                    _CustomInputForm(hintText: 'Email', inputType: TextInputType.emailAddress, prefixIcon: Icons.person, isHidden: false,),
+                    SizedBox(height: 50),
+                    _CustomInputForm(hintText: 'Password', inputType: TextInputType.text, prefixIcon: Icons.lock, isHidden: true,),
+                    SizedBox(height: 50),
+                    CustomELevatedButton(text: 'Login', width: width * 0.8, height: 50 )
+                  ],
+                )
               )
-            )
-          ],
-        )
+            ],
+          ),
+        ])
       ),
     );
       
