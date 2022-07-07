@@ -62,7 +62,7 @@ class _LoginForm extends StatelessWidget {
             child: TextFormField(
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.inputLoginDecoration(
+              decoration: _InputDecorations.inputLoginDecoration(
                 hintText: 'Password',
                 prefixIcon: Icons.lock)
             ),
@@ -98,7 +98,7 @@ class _CustomInputForm extends StatelessWidget {
               autocorrect: false,
               keyboardType: inputType,
               obscureText: isHidden,
-              decoration: InputDecorations.inputLoginDecoration(
+              decoration: _InputDecorations.inputLoginDecoration(
                 hintText: hintText,
                 prefixIcon: prefixIcon)
             ),
@@ -106,7 +106,7 @@ class _CustomInputForm extends StatelessWidget {
   }
 }
 
-class InputDecorations {
+class _InputDecorations {
   static InputDecoration inputLoginDecoration({
     required String hintText,
     IconData? prefixIcon

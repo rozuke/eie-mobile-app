@@ -14,6 +14,7 @@ final pageRoutes = <_Route> [
   _Route('Question Summary', const QuestionSummaryScreen()),
   _Route('Book Activities', const BookActivitiesScreen()),
   _Route('Activitie Forum', const ActivityForumScreen() ),
+  _Route('Forum Comments', const ForumCommentsScreen()),
 ];
 
 class _Route {

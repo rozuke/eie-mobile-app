@@ -13,7 +13,7 @@ class BookActivitiesScreen extends StatelessWidget {
       body: ListView(
         children: [
           
-          _ActivitieCard()
+          _ActivityCard()
         ],
       )
     );
@@ -21,8 +21,8 @@ class BookActivitiesScreen extends StatelessWidget {
 }
 
 
-class _ActivitieCard extends StatelessWidget {
-  const _ActivitieCard({Key? key}) : super(key: key);
+class _ActivityCard extends StatelessWidget {
+  const _ActivityCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
