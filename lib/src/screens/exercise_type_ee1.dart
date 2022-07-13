@@ -11,49 +11,42 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          Column(
+          SafeArea(child: ProgresBar()),
+          SizedBox(height: 30),
+          Text('Complete the sentence', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+          SizedBox(height: 100),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SafeArea(child: ProgresBar()),
-              SizedBox(height: 30),
-              Text('Complete the sentence', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
-              SizedBox(height: 150),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  
-                  _FormatText(text: 'Something Peter'),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    width: 100,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: ThemeApp.lightBlueColor,
-                    ),
-                  ),
-                  _FormatText(text: 'the wrong answer on a test'),
-                  
-                ],
-              ),
               
-              SizedBox(height: 150),
-              LabelButton(text: 'mark', isAdjustable: false, ),
-              SizedBox(height: 15),
-              LabelButton(text: 'marks', isAdjustable: false,),
-              SizedBox(height: 15),
-              LabelButton(text: 'to mark', isAdjustable: false,),
-            ]
-          ),
-          Container(
-          margin: EdgeInsets.only(bottom: 30),
-          child: Align(
-                  alignment: Alignment.bottomCenter,
-                  
-                  child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,)
+              _FormatText(text: 'Something Peter'),
+              Container(
+                width: 100,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: ThemeApp.lightBlueColor,
                 ),
-        )
+              ),
+              _FormatText(text: 'the wrong answer on a test'),
+              
+            ],
+          ),
+          
+          SizedBox(height: 100),
+          LabelButton(text: 'mark', isAdjustable: false, ),
+          SizedBox(height: 15),
+          LabelButton(text: 'marks', isAdjustable: false,),
+          SizedBox(height: 15),
+          LabelButton(text: 'to mark', isAdjustable: false,),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,),
+          )
+            
         ],
       ),
     );
@@ -62,10 +55,10 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
 
 
 class _FormatText extends StatelessWidget {
-  final String text ;
-  const _FormatText({
-    Key? key, required this.text,
-  }) : super(key: key);
+  
+  final String text;
+
+  const _FormatText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +71,7 @@ class _FormatText extends StatelessWidget {
         decorationColor: ThemeApp.complementaryColor,
         decorationThickness: 3,
         decorationStyle: TextDecorationStyle.dashed,
-        fontSize: 18
+        fontSize: 14
       )
     );
   }

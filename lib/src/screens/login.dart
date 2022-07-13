@@ -9,23 +9,35 @@ class LoginScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 500),
-            child: const Center(
-              child: _LoginForm()
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(
+              height: height * 0.45,
+              child: HeaderCircular()
+            ),
+            SizedBox(height: 30),
+            const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            SizedBox(height: 30),
+            Form(
+              child: Column(
+                children: [
+                  _CustomInputForm(hintText: 'Email', inputType: TextInputType.emailAddress, prefixIcon: Icons.person, isHidden: false,),
+                  SizedBox(height: 50),
+                  _CustomInputForm(hintText: 'Password', inputType: TextInputType.text, prefixIcon: Icons.lock, isHidden: true,),
+                  SizedBox(height: 50),
+                  CustomELevatedButton(text: 'Login', width: width * 0.8, height: 50 )
+                ],
+              )
             )
-          ),
-          const Expanded(
-            child: HeaderCircular(),
-          ),
-          
-          
-        ],
+          ],
+        )
       ),
-      );
+    );
+      
   }
 }
 
@@ -38,18 +50,8 @@ class _LoginForm extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          
           const SizedBox(height: 40),
-          SizedBox(
-            width: width * 0.8,
-            child: TextFormField(
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.inputLoginDecoration(
-                hintText: 'Email',
-                prefixIcon: Icons.person)
-            ),
-          ),
           const SizedBox(height: 60),
           SizedBox(
             width: width * 0.8,
@@ -60,12 +62,43 @@ class _LoginForm extends StatelessWidget {
                 hintText: 'Password',
                 prefixIcon: Icons.lock)
             ),
-          ),
+          )
+          ,
           const SizedBox(height: 60),
           CustomELevatedButton(text: 'Login',height: 60, width: width * 0.8, ),
         ]
       ),
     );
+  }
+}
+
+class _CustomInputForm extends StatelessWidget {
+
+  final String hintText;
+  final TextInputType inputType;
+  final IconData prefixIcon;
+  final bool isHidden;
+  
+  const _CustomInputForm({
+    Key? key,
+    required this.hintText,
+    required this.inputType,
+    required this.prefixIcon, required this.isHidden}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+    return SizedBox(
+            width: width * 0.8,
+            child: TextFormField(
+              autocorrect: false,
+              keyboardType: inputType,
+              obscureText: isHidden,
+              decoration: InputDecorations.inputLoginDecoration(
+                hintText: hintText,
+                prefixIcon: prefixIcon)
+            ),
+          );
   }
 }
 
@@ -106,25 +139,29 @@ class HeaderCircular extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width * 0.5;
-    return Stack(
-      children: [
-        Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: CustomPaint(
-            painter: _HeaderCicular(),
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    return SizedBox(
+      
+      child: Stack(
+        children: [
+          SizedBox(
+            height: height * 0.45,
+            width: width,
+            child: CustomPaint(
+                painter: _HeaderCicular(),
+              ),
           ),
-        ),
-        Positioned(
-            top: 340,
-            left: width - 65,
-            child: const Image(
-              height: 130,
-              image: AssetImage('assets/logos/eie-logo.png')
+          Positioned(
+              top: height * 0.30 ,
+              left: (width * 0.5) - 65,
+              child: const Image(
+                height: 130,
+                image: AssetImage('assets/logos/eie-logo.png')
+              ),
             ),
-          ),
-      ]
+        ]
+      ),
     );
   }
 }
@@ -139,8 +176,9 @@ class _HeaderCicular extends CustomPainter{
 
     final path = Path();
 
-    path.lineTo(0, size.height * 0.30);
-    path.quadraticBezierTo(size.width * 0.5, size.height * 0.45 , size.width, size.height * 0.30);
+    path.lineTo(0, size.height * 0.6);
+    path.quadraticBezierTo(size.width * 0.5, size.height, size.width, size.height * 0.6);
+    print('heigh> ${size.height}');
     path.lineTo(size.width, 0);
     canvas.drawPath(path, paint);
   }

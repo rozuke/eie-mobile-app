@@ -8,6 +8,16 @@ class ThemeApp {
   static const Color secondaryYellowColor = Color(0xffFFC300);
   static const Color complementaryColor = Color(0xffA08E27);
   static const Color lightBlueColor = Color(0xffB6D4E7);
-  
+  // Skill Color
+  static const Color skillColorLab = Color(0xffFF006E);
+  static const Color skillColorEE = Color(0xffFB5607);
+  static const Color skillColorHW = Color(0xff3A86FF);
+
+  static final ThemeData customLightTheme = ThemeData.light().copyWith(
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      unselectedItemColor: Colors.white,
+      
+    )
+  );
 
 }
