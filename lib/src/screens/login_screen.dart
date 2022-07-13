@@ -1,74 +1,59 @@
+import 'package:eie_mobile_app/src/screens/home_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   
-  static String nameRoute = 'login';
+  static const String nameRoute = '/login';
+
   const LoginScreen({Key? key}) : super(key: key);
   
+
+  void autenticateUser(BuildContext context) {
+    Navigator.pushReplacementNamed(context, HomeScreen.nameRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      
       body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: height * 0.45,
-              child: HeaderCircular()
-            ),
-            SizedBox(height: 30),
-            const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-            SizedBox(height: 30),
-            Form(
-              child: Column(
-                children: [
-                  _CustomInputForm(hintText: 'Email', inputType: TextInputType.emailAddress, prefixIcon: Icons.person, isHidden: false,),
-                  SizedBox(height: 50),
-                  _CustomInputForm(hintText: 'Password', inputType: TextInputType.text, prefixIcon: Icons.lock, isHidden: true,),
-                  SizedBox(height: 50),
-                  CustomELevatedButton(text: 'Login', width: width * 0.8, height: 50 )
-                ],
+        child: ListView(
+          children: 
+          [Column(
+            children: [
+              SizedBox(
+                height: height * 0.45,
+                child: HeaderCircular()
+              ),
+              SizedBox(height: 30),
+              const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 30),
+              Form(
+                child: Column(
+                  children: [
+                    _CustomInputForm(hintText: 'Email', inputType: TextInputType.emailAddress, prefixIcon: Icons.person, isHidden: false,),
+                    SizedBox(height: 50),
+                    _CustomInputForm(hintText: 'Password', inputType: TextInputType.text, prefixIcon: Icons.lock, isHidden: true,),
+                    SizedBox(height: 50),
+                    CustomELevatedButton(
+                      text: 'Login',
+                      width: width * 0.8,
+                      height: 50,
+                      onPressed: () => autenticateUser(context) 
+                    )
+                  ],
+                )
               )
-            )
-          ],
-        )
+            ],
+          ),
+        ])
       ),
     );
       
-  }
-}
-
-class _LoginForm extends StatelessWidget {
-  const _LoginForm({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    return Form(
-      child: Column(
-        children: [
-          
-          const SizedBox(height: 40),
-          const SizedBox(height: 60),
-          SizedBox(
-            width: width * 0.8,
-            child: TextFormField(
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecorations.inputLoginDecoration(
-                hintText: 'Password',
-                prefixIcon: Icons.lock)
-            ),
-          )
-          ,
-          const SizedBox(height: 60),
-          CustomELevatedButton(text: 'Login',height: 60, width: width * 0.8, ),
-        ]
-      ),
-    );
   }
 }
 
@@ -94,7 +79,7 @@ class _CustomInputForm extends StatelessWidget {
               autocorrect: false,
               keyboardType: inputType,
               obscureText: isHidden,
-              decoration: InputDecorations.inputLoginDecoration(
+              decoration: _InputDecorations.inputLoginDecoration(
                 hintText: hintText,
                 prefixIcon: prefixIcon)
             ),
@@ -102,7 +87,7 @@ class _CustomInputForm extends StatelessWidget {
   }
 }
 
-class InputDecorations {
+class _InputDecorations {
   static InputDecoration inputLoginDecoration({
     required String hintText,
     IconData? prefixIcon

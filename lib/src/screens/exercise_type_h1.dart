@@ -1,13 +1,18 @@
-import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:eie_mobile_app/src/theme/theme.dart';
+import 'package:eie_mobile_app/src/routes/routing.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
 class ExerciseTypeH1Screen extends StatelessWidget {
-  static String nameRoute = 'excercise_type_h1';
+  
+  static String nameRoute = '/excercise-type-h1';
+
   const ExerciseTypeH1Screen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+
+    final routeArguments = ModalRoute.of(context)?.settings.arguments as List<String>;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
@@ -28,7 +33,12 @@ class ExerciseTypeH1Screen extends StatelessWidget {
             const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 30),
-              child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,),
+              child: CustomELevatedButton(
+                text: 'Continue',
+                height: 60,
+                width: width * 0.83,
+                onPressed: () => Routing.selectNextScreen(context, routeArguments),
+              ),
             )
         ],
       ),

@@ -5,11 +5,12 @@ class CustomELevatedButton extends StatelessWidget {
   final String text;
   final double width;
   final double height;
+  final void Function() onPressed;
   const CustomELevatedButton({
     Key? key,
     required this.text,
     required this.width,
-    required this.height
+    required this.height, required this.onPressed
   }) : super(key: key);
 
   @override
@@ -23,7 +24,7 @@ class CustomELevatedButton extends StatelessWidget {
         ),
         
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(text),
     );
   }

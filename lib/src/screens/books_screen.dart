@@ -1,3 +1,8 @@
+import 'package:eie_mobile_app/src/screens/exercise_type_ee1.dart';
+import 'package:eie_mobile_app/src/screens/exercise_type_ee2.dart';
+import 'package:eie_mobile_app/src/screens/exercise_type_h1.dart';
+import 'package:eie_mobile_app/src/screens/exercise_type_lab1.dart';
+import 'package:eie_mobile_app/src/screens/exercise_type_lab2.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
@@ -5,7 +10,8 @@ import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
 
 class BooksScreen extends StatefulWidget {
-   static String nameRoute = 'home';
+
+  
   const BooksScreen({Key? key}) : super(key: key);
 
   @override
@@ -13,6 +19,7 @@ class BooksScreen extends StatefulWidget {
 }
 
 class _BooksScreenState extends State<BooksScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +43,27 @@ class _BooksScreenState extends State<BooksScreen> {
 }
 
 class _ListViewBooks extends StatelessWidget {
+
   const _ListViewBooks({
     Key? key,
   }) : super(key: key);
 
+  
+
+  void selectTheFirsExercise(BuildContext context){
+    List<String> questionsScreen = [
+    ExerciseLaboratory1Screen.nameRoute,
+    ExerciseLaboratory2Screen.nameRoute,
+    ExerciseTypeEE1Screen.nameRoute,
+    ExerciseTypeEE2Screen.nameRoute,
+    ExerciseTypeH1Screen.nameRoute,
+    ];
+    questionsScreen.shuffle();
+    final firstQuestion = questionsScreen[0] ;
+    questionsScreen.remove(firstQuestion);
+
+    Navigator.pushNamed(context, firstQuestion, arguments: questionsScreen);
+  }
   @override
   Widget build(BuildContext context) {
     const List<Book> books = [
@@ -50,6 +74,7 @@ class _ListViewBooks extends StatelessWidget {
       Book(name: 'Book 5', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_5_rounded),
       Book(name: 'Book 6', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_6_rounded)
     ];
+
     
     return ListView.builder(
       shrinkWrap: true,
@@ -59,10 +84,11 @@ class _ListViewBooks extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final book = books[index];
         return ListTile(
+          onTap: () => selectTheFirsExercise(context),
           leading: Icon(book.icon, size: 50, color: ThemeApp.complementaryColor,),
-            title: Text(book.name),
-            subtitle: Text(book.lessons.join(', ')),
-            trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
+          title: Text(book.name),
+          subtitle: Text(book.lessons.join(', ')),
+          trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
         );
       },
     );

@@ -1,8 +1,6 @@
-
+export 'package:eie_mobile_app/src/widgets/user_info.dart';
 export 'package:eie_mobile_app/src/widgets/score_card.dart';
-
 export 'package:eie_mobile_app/src/widgets/sound_icon_button.dart';
-
 export 'package:eie_mobile_app/src/widgets/custom_app_bar.dart';
 export 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 export 'package:eie_mobile_app/src/widgets/image_grid.dart';

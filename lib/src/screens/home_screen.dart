@@ -4,6 +4,8 @@ import 'package:eie_mobile_app/src/screens/screens.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
+
+  static const nameRoute = '/home';
    
   const HomeScreen({Key? key}) : super(key: key);
   

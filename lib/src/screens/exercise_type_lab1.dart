@@ -1,12 +1,12 @@
 import 'package:eie_mobile_app/src/theme/theme.dart';
-import 'package:eie_mobile_app/src/widgets/sound_icon_button.dart';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-
+import 'package:eie_mobile_app/src/routes/routing.dart';
 
 class ExerciseLaboratory1Screen extends StatefulWidget {
+
+  static const nameRoute = '/exercise-type-lab1';
    
   const ExerciseLaboratory1Screen({Key? key}) : super(key: key);
 
@@ -16,10 +16,29 @@ class ExerciseLaboratory1Screen extends StatefulWidget {
 
 class _ExerciseLaboratory1ScreenState extends State<ExerciseLaboratory1Screen> {
 
+  
+
+
   String url = 'https://sounds-mp3.com/mp3/0002368.mp3';
+
+  // void selectNextScreen(BuildContext context, List<String> screens) {
+
+  //   print('screens before: $screens');
+  //   if(screens.isEmpty){
+  //     Navigator.pushNamed(context, QuestionSummaryScreen.nameRoute);
+  //   } else {
+  //     final nextQuestion = screens.first;
+  //     screens.remove(screens.first);
+  //     print('screens after: $screens');
+  //     Navigator.pushNamed(context, nextQuestion, arguments: screens);
+  //   }
+  // }
   
   @override
   Widget build(BuildContext context) {
+
+    final routeArgs = ModalRoute.of(context)?.settings.arguments as List<String>;
+
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
@@ -43,7 +62,11 @@ class _ExerciseLaboratory1ScreenState extends State<ExerciseLaboratory1Screen> {
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
-            child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,),
+            child: CustomELevatedButton(
+              text: 'Continue',
+              height: 60,
+              width: width * 0.83,
+              onPressed:() => Routing.selectNextScreen(context, routeArgs) ),
           )
             
         ],
@@ -51,26 +74,6 @@ class _ExerciseLaboratory1ScreenState extends State<ExerciseLaboratory1Screen> {
     );
   }
 }
-
-
-// Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
-//             children: [
-//               LabelButton(text: 'family', isAdjustable: true),
-//               LabelButton(text: 'family', isAdjustable: true),
-//               LabelButton(text: 'family', isAdjustable: true),
-//               LabelButton(text: 'family', isAdjustable: true),
-              
-//             ],
-//           ),
-//           SizedBox(height: 30),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: [
-//               LabelButton(text: 'family', isAdjustable: true),
-//               LabelButton(text: 'family', isAdjustable: true),
-//             ],
-//           )
 
 
 class _GridLabels extends StatelessWidget {
