@@ -1,12 +1,19 @@
+import 'package:eie_mobile_app/src/screens/home_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
   
-  static String nameRoute = 'login';
+  static const String nameRoute = '/login';
+
   const LoginScreen({Key? key}) : super(key: key);
   
+
+  void autenticateUser(BuildContext context) {
+    Navigator.pushReplacementNamed(context, HomeScreen.nameRoute);
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -32,7 +39,12 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: 50),
                     _CustomInputForm(hintText: 'Password', inputType: TextInputType.text, prefixIcon: Icons.lock, isHidden: true,),
                     SizedBox(height: 50),
-                    CustomELevatedButton(text: 'Login', width: width * 0.8, height: 50 )
+                    CustomELevatedButton(
+                      text: 'Login',
+                      width: width * 0.8,
+                      height: 50,
+                      onPressed: () => autenticateUser(context) 
+                    )
                   ],
                 )
               )
@@ -42,37 +54,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
       
-  }
-}
-
-class _LoginForm extends StatelessWidget {
-  const _LoginForm({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    return Form(
-      child: Column(
-        children: [
-          
-          const SizedBox(height: 40),
-          const SizedBox(height: 60),
-          SizedBox(
-            width: width * 0.8,
-            child: TextFormField(
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-              decoration: _InputDecorations.inputLoginDecoration(
-                hintText: 'Password',
-                prefixIcon: Icons.lock)
-            ),
-          )
-          ,
-          const SizedBox(height: 60),
-          CustomELevatedButton(text: 'Login',height: 60, width: width * 0.8, ),
-        ]
-      ),
-    );
   }
 }
 

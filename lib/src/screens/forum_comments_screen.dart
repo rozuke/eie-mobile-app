@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
 class ForumCommentsScreen extends StatelessWidget {
-   
+  
+  static const nameRoute = '/forum-comments';
+
   const ForumCommentsScreen({Key? key}) : super(key: key);
   
   

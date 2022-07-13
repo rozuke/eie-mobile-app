@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
+import 'package:eie_mobile_app/src/routes/routing.dart';
 
 class ExerciseTypeEE2Screen extends StatelessWidget {
-   
+  
+  static const nameRoute = '/exercise-type-ee2';
+
   const ExerciseTypeEE2Screen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+
+    final routeArguments = ModalRoute.of(context)?.settings.arguments as List<String>;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
@@ -38,7 +43,12 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
               Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
-                child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,),
+                child: CustomELevatedButton(
+                  text: 'Continue',
+                  height: 60,
+                  width: width * 0.83,
+                  onPressed: () => Routing.selectNextScreen(context, routeArguments),
+                ),
               )
             
         ],

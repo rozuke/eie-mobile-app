@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
+import 'package:eie_mobile_app/src/routes/routing.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
 
 class QuestionSummaryScreen extends StatelessWidget {
-   
+
+  static const nameRoute = '/question-summary'; 
+  
   const QuestionSummaryScreen({Key? key}) : super(key: key);
   
   @override
@@ -37,7 +40,12 @@ class QuestionSummaryScreen extends StatelessWidget {
             Spacer(),
               Padding(
                 padding: EdgeInsets.only(bottom: 30),
-                child: CustomELevatedButton(text: 'Continue', height: 60, width: width * 0.83,)
+                child: CustomELevatedButton(
+                  text: 'Continue',
+                  height: 60,
+                  width: width * 0.83,
+                  onPressed: () => Routing.backHome(context),
+                )
               )
             
         ],

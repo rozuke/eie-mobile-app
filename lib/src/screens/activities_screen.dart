@@ -1,13 +1,27 @@
+import 'package:eie_mobile_app/src/screens/book_activities_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
 class ActivitiesScreen extends StatelessWidget {
+  static const nameRoute = '/activities';
    
   const ActivitiesScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+
+    List<Chanel> chanels = [
+      Chanel(title: 'B1', name: 'Book 1 activities'),
+      Chanel(title: 'B2', name: 'Book 2 activities'),
+      Chanel(title: 'B3', name: 'Book 3 activities'),
+      Chanel(title: 'B4', name: 'Book 4 activities'),
+      Chanel(title: 'B5', name: 'Book 5 activities'),
+      Chanel(title: 'B6', name: 'Book 6 activities'),
+      Chanel(title: 'B6', name: 'Book 6 activities'),
+    ];
+
+
     return Scaffold(
       appBar: CustomAppBar(title: 'Activities'),
       body: SingleChildScrollView(
@@ -21,7 +35,22 @@ class ActivitiesScreen extends StatelessWidget {
                 Text('Basic level course', style: TextStyle(fontSize: 16),)
               ],
             ),
-            _BooksChanel()
+            GridView.builder(
+              shrinkWrap: true,
+              primary: false,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 30,
+                mainAxisSpacing: 30,
+              ),
+              padding: const EdgeInsets.all(30),
+              itemCount: chanels.length,
+              itemBuilder: ( _ , index) => _CardChanel(
+                title: chanels[index].title,
+                name: chanels[index].name,
+                onPressed: () => {Navigator.pushNamed(context, BookActivitiesScreen.nameRoute)},
+              ),
+            )
           ],
         ),
       ),
@@ -29,48 +58,16 @@ class ActivitiesScreen extends StatelessWidget {
   }
 }
 
-class _BooksChanel extends StatelessWidget {
-  const _BooksChanel({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    
-    List<Chanel> chanels = [
-      Chanel(title: 'B1', name: 'Book 1 activities'),
-      Chanel(title: 'B2', name: 'Book 2 activities'),
-      Chanel(title: 'B3', name: 'Book 3 activities'),
-      Chanel(title: 'B4', name: 'Book 4 activities'),
-      Chanel(title: 'B5', name: 'Book 5 activities'),
-      Chanel(title: 'B6', name: 'Book 6 activities'),
-      Chanel(title: 'B6', name: 'Book 6 activities'),
-    ];
-    
-      return GridView.builder(
-        shrinkWrap: true,
-        primary: false,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 30,
-          mainAxisSpacing: 30,
-        ),
-        padding: const EdgeInsets.all(30),
-        itemCount: chanels.length,
-        itemBuilder: ( _ , index) {
-          return _CardChanel(title: chanels[index].title, name: chanels[index].name,);
-        },
-      );
-  }
-}
 
 class _CardChanel extends StatelessWidget {
   final String title;
   final String name;
+  final void Function() onPressed;
   const _CardChanel({
     Key? key,
     required this.title,
     required this.name,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -79,7 +76,7 @@ class _CardChanel extends StatelessWidget {
     const double size = 150;
     
     return GestureDetector(
-      onTap: (){},
+      onTap: onPressed,
       child: Container(
         height: size,
         width: size,

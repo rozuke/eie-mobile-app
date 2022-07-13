@@ -1,6 +1,6 @@
+import 'package:eie_mobile_app/src/routes/routes.dart';
 import 'package:eie_mobile_app/src/screens/launcher_temp.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
 
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LauncherTemp(),
+      initialRoute: LoginScreen.nameRoute,
+      routes: AppRoutes.routes,
       theme: ThemeApp.customLightTheme,
       // initialRoute: LoginScreen.nameRoute,
       // routes: {
