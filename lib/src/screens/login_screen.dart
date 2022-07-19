@@ -1,5 +1,6 @@
 import 'package:eie_mobile_app/src/controllers/question_controller.dart';
 import 'package:eie_mobile_app/src/screens/home_screen.dart';
+import 'package:eie_mobile_app/src/services/service.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,8 @@ class LoginScreen extends StatelessWidget {
   
   static const String nameRoute = '/login';
   
-  final QuestionController questionController = Get.put(QuestionController());
-  LoginScreen({Key? key}) : super(key: key);
+  // final QuestionController questionController = Get.put(QuestionController());
+  const LoginScreen({Key? key}) : super(key: key);
   
 
   void autenticateUser(BuildContext context) {
@@ -59,6 +60,10 @@ class LoginScreen extends StatelessWidget {
     );
       
   }
+}
+
+Future signIn() async {
+  await GoogleSignInAuth.login();
 }
 
 class _CustomInputForm extends StatelessWidget {

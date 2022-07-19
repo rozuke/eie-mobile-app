@@ -1,8 +1,6 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:eie_mobile_app/src/models/question_model.dart';
-import 'package:http/http.dart' as http;
 class QuestionService {
   final Dio _dio = Dio();
 
@@ -19,9 +17,9 @@ class QuestionService {
       Response response = await _dio.get(baseURL);
       final questions = response.data;
       
-      // return List<Question>.from(
-      //   (questions).map((x) => Question.fromJson(x))
-      // );
+      return List<Question>.from(
+        (questions).map((x) => Question.fromJson(x))
+      );
 
       
     } on DioError catch (e) {

@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/screens/activity_forum_screen.dart';
 import 'package:eie_mobile_app/src/screens/book_activities_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +13,7 @@ class ActivitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List<Chanel> chanels = [
-      Chanel(title: 'B1', name: 'Book 1 activities'),
-      Chanel(title: 'B2', name: 'Book 2 activities'),
-      Chanel(title: 'B3', name: 'Book 3 activities'),
-      Chanel(title: 'B4', name: 'Book 4 activities'),
-      Chanel(title: 'B5', name: 'Book 5 activities'),
-      Chanel(title: 'B6', name: 'Book 6 activities'),
-      Chanel(title: 'B6', name: 'Book 6 activities'),
+      Chanel(title: 'Forum', name: 'Forum'),
     ];
 
 
@@ -29,10 +24,10 @@ class ActivitiesScreen extends StatelessWidget {
           children: [
             SizedBox(height: 30,),
             Row(
-              children: [
+              children: const [
                 SizedBox(width: 20),
                 Icon(Icons.list_alt_outlined, color: ThemeApp.primaryYellowColor, size: 40),
-                Text('Basic level course', style: TextStyle(fontSize: 16),)
+                Text('Basic level course', style: TextStyle(fontSize: 18),)
               ],
             ),
             GridView.builder(
@@ -43,12 +38,12 @@ class ActivitiesScreen extends StatelessWidget {
                 crossAxisSpacing: 30,
                 mainAxisSpacing: 30,
               ),
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(40),
               itemCount: chanels.length,
               itemBuilder: ( _ , index) => _CardChanel(
                 title: chanels[index].title,
                 name: chanels[index].name,
-                onPressed: () => {Navigator.pushNamed(context, BookActivitiesScreen.nameRoute)},
+                onPressed: () => {Navigator.pushNamed(context, ActivityForumScreen.nameRoute)},
               ),
             )
           ],
@@ -88,17 +83,19 @@ class _CardChanel extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              height: size * 0.7,
-              width: size * 0.7,
+              height: size * 0.9,
+              width: size * 0.9,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: ThemeApp.secondaryBlueColor,
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(10),
               ),
               
-              child: Text(title, style: TextStyle(fontSize: 24, color: Colors.white)),
+              child: Image.asset(
+                'assets/logos/foro-logo.png',
+              ),
             ),
-            Text(name, style: TextStyle(fontSize: 14))
+            Text(name, style: TextStyle(fontSize: 16, color: ThemeApp.primaryBlueColor),),
           ],
         )
       ),

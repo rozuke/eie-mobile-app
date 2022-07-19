@@ -16,20 +16,20 @@ class ProfileScreen extends StatelessWidget {
           _ProfileInfo(),
           
           Padding(
-            padding: EdgeInsets.only(left: 20),
+            padding: EdgeInsets.only(left: 10),
             child: ListTile(
               leading: Icon(Icons.newspaper, color: ThemeApp.secondaryYellowColor),
-              title: Text('Level basic books', style: TextStyle(fontSize: 20),),
+              title: Text('Information', style: TextStyle(fontSize: 18),),
             )
           ),
           
           _CourseInfo(),
 
           Padding(
-            padding: EdgeInsets.only(left: 20),
+            padding: EdgeInsets.only(left: 10),
             child: ListTile(
               leading: Icon(Icons.newspaper, color: ThemeApp.secondaryYellowColor),
-              title: Text('Level basic books', style: TextStyle(fontSize: 20),),
+              title: Text('Level basic books', style: TextStyle(fontSize: 18),),
             )
           ),
 
@@ -83,73 +83,67 @@ class _CourseInfoState extends State<_CourseInfo> {
   @override
   Widget build(BuildContext context) {
 
-    final List<ExpandedTile> listTiles = [
-      ExpandedTile(title: 'Book 1', icon: Icons.menu_book_rounded, tiles: [
-        ExpandedTile(title: 'Lesson 1'),
-        ExpandedTile(title: 'Lesson 2'),
-        ExpandedTile(title: 'Lesson 3'),
-        ExpandedTile(title: 'Lesson 4'),
-      ]),
-      ExpandedTile(title: 'Book 2', icon: Icons.menu_book_rounded, tiles: [
-        ExpandedTile(title: 'Lesson 1'),
-        ExpandedTile(title: 'Lesson 2'),
-        ExpandedTile(title: 'Lesson 3'),
-        ExpandedTile(title: 'Lesson 4'),
-      ]),
-      ExpandedTile(title: 'Book 3', icon: Icons.menu_book_rounded, tiles: [
-        ExpandedTile(title: 'Lesson 1'),
-        ExpandedTile(title: 'Lesson 2'),
-        ExpandedTile(title: 'Lesson 3'),
-        ExpandedTile(title: 'Lesson 4'),
-      ]),
-      ExpandedTile(title: 'Book 4', icon: Icons.menu_book_rounded, tiles: [
-        ExpandedTile(title: 'Lesson 1'),
-        ExpandedTile(title: 'Lesson 2'),
-        ExpandedTile(title: 'Lesson 3'),
-        ExpandedTile(title: 'Lesson 4'),
-      ]),
-      ExpandedTile(title: 'Book 5', icon: Icons.menu_book_rounded, tiles: [
-        ExpandedTile(title: 'Lesson 1'),
-        ExpandedTile(title: 'Lesson 2'),
-        ExpandedTile(title: 'Lesson 3'),
-        ExpandedTile(title: 'Lesson 4'),
-      ]),
-      ExpandedTile(title: 'Book 6', icon: Icons.menu_book_rounded, tiles: [
-        ExpandedTile(title: 'Lesson 1'),
-        ExpandedTile(title: 'Lesson 2'),
-        ExpandedTile(title: 'Lesson 3'),
-        ExpandedTile(title: 'Lesson 4'),
-      ])
+    final info = [{
+      'icon' : Icons.book_outlined,
+      'title' : 'Current Book',
+      'subtitle' : ['Book 1', 'Level 1']
+    }, 
+    {
+      'icon' : Icons.chrome_reader_mode_rounded,
+      'title' : 'Current Book',
+      'subtitle' : ['Book 1', 'Level 1']
+    }
     ];
-
     
-    return Flexible(
-      child: Container(
-        margin: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          border: Border.all(color: ThemeApp.complementaryColor, width: 2),
-          borderRadius: BorderRadius.circular(10)
+    return Row(
+      
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _InfoBookCard(
+          title: 'Curren Book',
+          description: ['Book 1', 'Level 1'],
+          icon: Icons.book_outlined
         ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: SingleChildScrollView(
-            child: ExpansionPanelList.radio(
-              dividerColor: ThemeApp.complementaryColor,
-              children: 
-                listTiles.map((tile) => ExpansionPanelRadio(
-                  canTapOnHeader: true,
-                  value: tile.title,
-                  headerBuilder: ( _ , isExpanded) =>buildTile(tile),
-                  body: Column(
-                    children: tile.tiles.map(buildTile).toList(),
-                  ))).toList(),
-            ),
-          ),
+        SizedBox(width: 5,),
+        _InfoBookCard(
+          title: 'Lessos',
+          description: ['Lesson 1', 'Bobs a Barber', 'Lesson 3', 'Lesson 4'],
+          icon: Icons.chrome_reader_mode_outlined
         ),
-        
-        
-      ),
+      ],
     );
+  }
+}
+
+class _InfoBookCard extends StatelessWidget {
+  final String title;
+  final List<String> description;
+  final IconData icon;
+  const _InfoBookCard({
+    Key? key, required this.title, required this.description, required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width * 0.4;
+    return Container(
+      height: 150,
+      width: width,
+      decoration: BoxDecoration(
+        border: Border.all(color: ThemeApp.complementaryColor, width: 2),
+        borderRadius: BorderRadius.circular(10)
+      ),
+      child: ListTile(
+        leading: Icon(icon, color: ThemeApp.secondaryYellowColor),
+        title: Text( title, style: TextStyle(fontSize: 16),),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: description.map((subtitle) => Text(subtitle, style: TextStyle(color: ThemeApp.secondaryBlueColor),)).toList(),
+      )
+      )
+    
+      );
+    
   }
 }
 
@@ -203,3 +197,19 @@ class ExpandedTile {
     this.isExpanded = false,
   });
 }
+
+
+// Before course info
+// child: SingleChildScrollView(
+//             child: ExpansionPanelList.radio(
+//               dividerColor: ThemeApp.complementaryColor,
+//               children: 
+//                 listTiles.map((tile) => ExpansionPanelRadio(
+//                   canTapOnHeader: true,
+//                   value: tile.title,
+//                   headerBuilder: ( _ , isExpanded) =>buildTile(tile),
+//                   body: Column(
+//                     children: tile.tiles.map(buildTile).toList(),
+//                   ))).toList(),
+//             ),
+//           ),
