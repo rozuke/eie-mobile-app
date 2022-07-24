@@ -6,7 +6,7 @@ import 'package:eie_mobile_app/src/screens/screens.dart';
 class AppRoutes {
 
   static  Map<String, Widget Function(BuildContext)> routes = {
-    LoginScreen.nameRoute: (context) => const LoginScreen(),
+    LoginScreen.nameRoute: (context) => LoginScreen(),
     HomeScreen.nameRoute: (context) => const HomeScreen(),
     ExerciseTypeH1Screen.nameRoute: (context) => const ExerciseTypeH1Screen(),
     ExerciseTypeEE1Screen.nameRoute: (context) => const ExerciseTypeEE1Screen(),
@@ -24,7 +24,7 @@ class AppRoutes {
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => const LoginScreen()
+      builder: (context) => LoginScreen()
     );
   }
 

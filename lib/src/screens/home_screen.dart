@@ -1,12 +1,13 @@
+import 'package:eie_mobile_app/src/controllers/question_controller.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
 
   static const nameRoute = '/home';
-   
   const HomeScreen({Key? key}) : super(key: key);
   
   @override

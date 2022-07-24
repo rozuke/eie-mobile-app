@@ -1,10 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/routes/routing.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 
 class ExerciseTypeH1Screen extends StatelessWidget {
-  
   static String nameRoute = '/excercise-type-h1';
 
   const ExerciseTypeH1Screen({Key? key}) : super(key: key);

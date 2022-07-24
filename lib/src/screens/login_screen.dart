@@ -1,13 +1,16 @@
+import 'package:eie_mobile_app/src/controllers/question_controller.dart';
 import 'package:eie_mobile_app/src/screens/home_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   
   static const String nameRoute = '/login';
-
-  const LoginScreen({Key? key}) : super(key: key);
+  
+  final QuestionController questionController = Get.put(QuestionController());
+  LoginScreen({Key? key}) : super(key: key);
   
 
   void autenticateUser(BuildContext context) {
@@ -16,6 +19,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get.put(QuestionController());
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
