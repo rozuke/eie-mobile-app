@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final awsResponse = awsResponseFromMap(jsonString);
 
 import 'dart:convert';
 

@@ -1,6 +1,9 @@
 import 'package:eie_mobile_app/src/controllers/question_controller.dart';
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/models/user_model.dart';
 import 'package:eie_mobile_app/src/screens/home_screen.dart';
 import 'package:eie_mobile_app/src/services/service.dart';
+import 'package:eie_mobile_app/src/services/user_service.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -8,15 +11,36 @@ import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   
+  final userService = Get.put(UserService());
+  final userController = Get.put(UserController());
   static const String nameRoute = '/login';
   
-  // final QuestionController questionController = Get.put(QuestionController());
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
   
 
   void autenticateUser(BuildContext context) {
     Navigator.pushReplacementNamed(context, HomeScreen.nameRoute);
   }
+
+  signIn(context) async {
+  final user = await GoogleSignInAuth.login();
+  if (user == null ) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Login failed'),
+        backgroundColor: Colors.red,
+      )
+    );
+  } else {
+    // final userService = UserService();
+    final userEIE = await userService.getUser(user.email);
+    if (userEIE.rolId == 1 ) {
+      final controller = Get.find<UserController>();
+      controller.setUser = userEIE;
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                 child: HeaderCircular()
               ),
               SizedBox(height: 30),
-              const Text('Login', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const Text('Sign In', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(height: 30),
               Form(
                 child: Column(
@@ -48,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                       text: 'Login',
                       width: width * 0.8,
                       height: 50,
-                      onPressed: () => autenticateUser(context) 
+                      onPressed: () => signIn(context)
                     )
                   ],
                 )
@@ -62,9 +86,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-Future signIn() async {
-  await GoogleSignInAuth.login();
-}
+
 
 class _CustomInputForm extends StatelessWidget {
 
@@ -172,7 +194,6 @@ class _HeaderCicular extends CustomPainter{
 
     path.lineTo(0, size.height * 0.6);
     path.quadraticBezierTo(size.width * 0.5, size.height, size.width, size.height * 0.6);
-    print('heigh> ${size.height}');
     path.lineTo(size.width, 0);
     canvas.drawPath(path, paint);
   }

@@ -6,13 +6,11 @@ class Routing {
 
   static void selectNextScreen(BuildContext context, List<String> screens) {
 
-    print('screens before: $screens');
     if(screens.isEmpty){
       Navigator.pushNamed(context, QuestionSummaryScreen.nameRoute);
     } else {
       final nextQuestion = screens.first;
       screens.remove(screens.first);
-      print('screens after: $screens');
       Navigator.pushReplacementNamed(context, nextQuestion, arguments: screens);
     }
   }

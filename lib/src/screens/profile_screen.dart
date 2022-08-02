@@ -1,25 +1,31 @@
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/models/user_model.dart';
+import 'package:eie_mobile_app/src/screens/login_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-
+import 'package:eie_mobile_app/src/services/service.dart';
+import 'package:get/get.dart';
 class ProfileScreen extends StatelessWidget {
-   
-  const ProfileScreen({Key? key}) : super(key: key);
+   final controller = Get.find<UserController>();
+  ProfileScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+
+    final User user = controller.getUser;
     return Scaffold(
       appBar: CustomAppBar(title: 'Profile'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          _ProfileInfo(),
+        children: [
+          _ProfileInfo(user: user),
           
           Padding(
             padding: EdgeInsets.only(left: 10),
             child: ListTile(
               leading: Icon(Icons.newspaper, color: ThemeApp.secondaryYellowColor),
-              title: Text('Information', style: TextStyle(fontSize: 18),),
+              title: Text("Information" , style: TextStyle(fontSize: 18),),
             )
           ),
           
@@ -156,26 +162,42 @@ Widget buildTile( ExpandedTile tile ) => ListTile(
 
 
 class _ProfileInfo extends StatelessWidget {
-  const _ProfileInfo({Key? key}) : super(key: key);
+  final User user;
+  const _ProfileInfo({Key? key, required this.user}) : super(key: key);
 
+  // charts for avatar circle
+  String getChartsForAvatar (String name) {
+    var value = name.split(" ");
+    if (value.length > 1) {
+      return "${value[0][0]}${value[1][0]}";
+    } else {
+      return value[0][0];
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
+    String textAvatar = getChartsForAvatar(user.nombre);
     return Container(
       height: 100,
       child: Card(
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.lightBlue[300],
-            child: Text('RE', style: TextStyle(color: Colors.white))
+            child: Text(textAvatar, style: TextStyle(color: Colors.white))
           ),
-          title: Text('Rodrigo Estiven Sulca Acosta', style: TextStyle(color: ThemeApp.primaryBlueColor, fontSize: 20),),
+          title: Text(user.nombre, style: TextStyle(color: ThemeApp.primaryBlueColor, fontSize: 20),),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Student', style: TextStyle(color: ThemeApp.primaryBlueColor),),
-              Text('rodrigo@gmail.com', style: TextStyle(color: ThemeApp.secondaryBlueColor),)
+              Text(user.email, style: TextStyle(color: ThemeApp.secondaryBlueColor),)
             ],
           ),
+          trailing: IconButton(icon: const Icon(Icons.logout),onPressed: (() async {
+            await GoogleSignInAuth.logout();
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+          } )),
 
         ),
       ),
