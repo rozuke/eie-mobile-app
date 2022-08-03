@@ -7,14 +7,14 @@ class AppRoutes {
 
   static  Map<String, Widget Function(BuildContext)> routes = {
     LoginScreen.nameRoute: (context) => LoginScreen(),
-    HomeScreen.nameRoute: (context) => const HomeScreen(),
+    HomeScreen.nameRoute: (context) => HomeScreen(),
     ExerciseTypeH1Screen.nameRoute: (context) => const ExerciseTypeH1Screen(),
     ExerciseTypeEE1Screen.nameRoute: (context) => const ExerciseTypeEE1Screen(),
     ExerciseTypeEE2Screen.nameRoute: (context) => const ExerciseTypeEE2Screen(),
     ExerciseLaboratory1Screen.nameRoute: (context) => const ExerciseLaboratory1Screen(),
     ExerciseLaboratory2Screen.nameRoute: (context) => const ExerciseLaboratory2Screen(),
-    ActivitiesScreen.nameRoute: (context) => const ActivitiesScreen(),
-    ActivityForumScreen.nameRoute: (context) => const ActivityForumScreen(),
+    ActivitiesScreen.nameRoute: (context) =>  ActivitiesScreen(),
+    ActivityForumScreen.nameRoute: (context) => ActivityForumScreen(),
     BookActivitiesScreen.nameRoute: (context) => const BookActivitiesScreen(),
     ForumCommentsScreen.nameRoute: (context) => const ForumCommentsScreen(),
     QuestionSummaryScreen.nameRoute: (context) => const QuestionSummaryScreen(),

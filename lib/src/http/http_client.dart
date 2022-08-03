@@ -5,7 +5,8 @@ class HttpClient {
 
   final Dio _dio = Dio();
 
-  String _baseUserURL = "https://mwb03srtpc.execute-api.sa-east-1.amazonaws.com/api";
+  final String _baseUserURL = "https://mwb03srtpc.execute-api.sa-east-1.amazonaws.com/api";
+  final String _baseActivityURL = "https://kfaiqnrzja.execute-api.sa-east-1.amazonaws.com/api";
 
   HttpClient() {
     // initializeInterceptors();
@@ -14,6 +15,17 @@ class HttpClient {
     Response response;
     try{
       response = await _dio.get("$_baseUserURL/$url");
+      return response;
+    }on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+  }
+
+  Future<Response> getActivityRequest( String url ) async {
+    Response response;
+    try{
+      response = await _dio.get("$_baseActivityURL/$url");
       return response;
     }on DioError catch (e) {
       print(e.message);

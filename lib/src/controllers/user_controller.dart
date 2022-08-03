@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/models/course_model.dart';
 import 'package:eie_mobile_app/src/models/user_model.dart';
 import 'package:eie_mobile_app/src/services/user_service.dart';
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ class UserController extends GetxController {
 
   final userService = Get.find<UserService>();
   var user = <User>[].obs;
+  var course = <Course>[].obs;
 
  
 
@@ -19,6 +21,12 @@ set setUser(User newUser){
   user.add(newUser);
 }
 User get getUser => user[0];
+
+set setCourse(Course newCourse){
+  course.add(newCourse);
+}
+
+Course get getCourse => course[0];
 
 //  Future getUser(String email) async {
 //     try{

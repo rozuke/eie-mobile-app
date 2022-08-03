@@ -1,4 +1,8 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
 import 'package:eie_mobile_app/src/controllers/question_controller.dart';
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/services/activity_service.dart';
+import 'package:eie_mobile_app/src/services/user_service.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
@@ -6,12 +10,21 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
-
+  final activityService = Get.put(ActivityService());
+  final activityController = Get.put(ActivityController());
+  final userService = Get.find<UserService>();
+  final controller = Get.find<UserController>();
   static const nameRoute = '/home';
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
   
+  fetchCourse() async{
+    final course = await userService.getCourse(controller.getUser.usuarioId);
+    controller.setCourse = course;
+    print(course.cursoId);
+  }
   @override
   Widget build(BuildContext context) {
+    fetchCourse();
     return ChangeNotifierProvider(
       create: ( _ ) => _NavegationModel(),
       child: Scaffold(

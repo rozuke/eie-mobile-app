@@ -220,18 +220,3 @@ class ExpandedTile {
   });
 }
 
-
-// Before course info
-// child: SingleChildScrollView(
-//             child: ExpansionPanelList.radio(
-//               dividerColor: ThemeApp.complementaryColor,
-//               children: 
-//                 listTiles.map((tile) => ExpansionPanelRadio(
-//                   canTapOnHeader: true,
-//                   value: tile.title,
-//                   headerBuilder: ( _ , isExpanded) =>buildTile(tile),
-//                   body: Column(
-//                     children: tile.tiles.map(buildTile).toList(),
-//                   ))).toList(),
-//             ),
-//           ),
