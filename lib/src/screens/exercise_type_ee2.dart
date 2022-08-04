@@ -44,7 +44,7 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: _BoxMeessage(
                   isLeft: true,
-                  message: 'Who wa in the classroom this morning?')
+                  message: 'Who was in the classroom this morning?')
                 ),
               const Align(
                 alignment: Alignment.centerRight,
@@ -66,16 +66,16 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: CustomELevatedButton(
-                  text: 'Continue',
+                  text: 'Check',
                   height: 60,
                   width: width * 0.83,
                   onPressed: () async{
 
-                    int  note = activityController.getAnswer().last? 20: 0;
+                    int  note = activityController.getAnswer().last? 25: 0;
                     final Map<String, dynamic> data = {
                       'puntuacion': note,
                       'usuarioId': userController.getUser.usuarioId,
-                      'preguntaId': 4,
+                      'preguntaId': 3,
                       'valoracionId': 1
                     };
                      await activityService.postNewParticipation(data);

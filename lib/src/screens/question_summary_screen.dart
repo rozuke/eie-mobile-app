@@ -1,4 +1,7 @@
 import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/models/result_model.dart';
+import 'package:eie_mobile_app/src/services/activity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/routes/routing.dart';
@@ -10,6 +13,8 @@ class QuestionSummaryScreen extends StatelessWidget {
 
   static const nameRoute = '/question-summary'; 
   final activityController = Get.find<ActivityController>();
+  final userController = Get.find<UserController>();
+  final activityService = Get.find<ActivityService>();
   QuestionSummaryScreen({Key? key}) : super(key: key);
   
   @override
@@ -18,8 +23,10 @@ class QuestionSummaryScreen extends StatelessWidget {
 
     // var questions = activityController.getAnswer().map((e) => e ? 1 : 0).reduce((a, b) => a + b) as int;
     int questions = activityController.rightAnswers;
+    final homework = activityController.answer[3]? 25: 0;
+    final ee = (activityController.answer[2]? 25: 0) + (activityController.answer[1]? 25: 0);
+    final laboratory = activityController.answer[0]? 25: 0;
     final finalScore = (questions * 25).round();
-    print(questions);
 
     return Scaffold(
       appBar: const CustomAppBar(title: 'Questions Summary'),
@@ -52,7 +59,26 @@ class QuestionSummaryScreen extends StatelessWidget {
                   text: 'Continue',
                   height: 60,
                   width: width * 0.83,
-                  onPressed: () => CustomRouting.backHome(context),
+                  onPressed: () {
+                    final Result result = activityController.getResult;
+                    print(result);
+                    if (result.resultadoId == null) {
+                      final Map<String, dynamic> data = {
+                        "notaHomework": homework,
+                        "notaEE": ee,
+                        "notaLaboratory": laboratory,
+                        "cantidadParticipacion": 4,
+                        "usuarioId": userController.getUser.usuarioId,
+                        "valoracionId": 1
+                      };
+                      activityService.postNewResult(data);
+                    } else {
+                      activityService.putStudenResult(userController.getUser.usuarioId);
+                    }
+                    activityController.answer.clear();
+                    // print("homework $homework ee $ee laboratory $laboratory");
+                    CustomRouting.backHome(context);
+                  } 
                 )
               )
             

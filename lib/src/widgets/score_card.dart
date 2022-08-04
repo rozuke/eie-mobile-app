@@ -5,7 +5,7 @@ import 'package:eie_mobile_app/src/theme/theme.dart';
 class ScoreCard extends StatelessWidget {
 
   final String title;
-  final double score;
+  final String score;
   final double percentage;
   final Color color;
   final IconData icon;
@@ -47,7 +47,7 @@ class ScoreCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                     Text( title, style: TextStyle(fontSize: 16)),
-                    Text('$score', style: TextStyle(fontSize: 16, color: ThemeApp.secondaryBlueColor),)
+                    Text(score, style: TextStyle(fontSize: 16, color: ThemeApp.secondaryBlueColor),)
                     
                   ],
                 ),

@@ -44,6 +44,17 @@ class HttpClient {
     }
   }
 
+  Future<Response> putActivityRequest( String url ) async {
+    Response response;
+    try{
+      response = await _dio.put("$_baseActivityURL/$url",);
+      return response;
+    }on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+  }
+
   initializeInterceptors(){
     _dio.interceptors.add(InterceptorsWrapper(
       onError: (e, _ ) => {

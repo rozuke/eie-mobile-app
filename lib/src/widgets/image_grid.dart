@@ -28,22 +28,33 @@ class ImageGrid extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(horizontal: spaceElements / 2),
         itemCount: options.length,
-        itemBuilder: ( _ , index) => GestureDetector(
-          onTap: () {
-            
-            if (activityController.answer.length < condition) {
-              activityController.setAnswer(options[index].isCorrect);
-
-            } else {
-              activityController.getAnswer().removeLast();
-              activityController.setAnswer(options[index].isCorrect);
-            }
-            activityController.setDescription = options[index].description;
-
-          },
-          child: InkWell(
-            highlightColor: ThemeApp.secondaryYellowColor.withOpacity(0.3),
-            child: Image.network(options[index].imageURL,width: 200, height: 180, ),
+        itemBuilder: ( _ , index) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 1),
+            borderRadius: BorderRadius.circular(20)
+          ),
+          margin: EdgeInsets.all(spaceElements / 2),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+        
+            child: GestureDetector(
+              onTap: () {
+                
+                if (activityController.answer.length < condition) {
+                  activityController.setAnswer(options[index].isCorrect);
+          
+                } else {
+                  activityController.getAnswer().removeLast();
+                  activityController.setAnswer(options[index].isCorrect);
+                }
+                activityController.setDescription = options[index].description;
+          
+              },
+              child: InkWell(
+                highlightColor: ThemeApp.secondaryYellowColor.withOpacity(0.3),
+                child: Image.network(options[index].imageURL,width: 200, height: 180, fit: BoxFit.fill,),
+              ),
+            ),
           ),
         ));
    

@@ -27,10 +27,10 @@ class ExerciseTypeH1Screen extends StatelessWidget {
 
 
     List<GroupImage> options = [
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a pencil", isCorrect: true, isSelectect: false),
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a clock", isCorrect: false, isSelectect: false),
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a table", isCorrect: false, isSelectect: false),
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a door", isCorrect: false, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=18WifRZs7edfAGEjIj3Jzgjr2hjLG0hD3", description: "It's a picture", isCorrect: true, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=1-Fg-Ov3YQDOhb9HzziwXv6cK6H01Hz1t", description: "It's a table", isCorrect: false, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=1cgoEoapwbLLnxH7wyBS6a3d8On_RIUo6", description: "It's a door", isCorrect: false, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=1KFcyLbCZTFvtFSOPTtLyMmW6ug7Ye297", description: "It's a window", isCorrect: false, isSelectect: false),
 ];
 
     return Scaffold(
@@ -43,7 +43,7 @@ class ExerciseTypeH1Screen extends StatelessWidget {
                 const SizedBox(height: 30),
                 const Text('Select the rigth picture', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
                 const SizedBox(height: 20),
-                const _FormatText(text: 'This is a pencil',),
+                const _FormatText(text: "It's a picture",),
                 const SizedBox(height: 40),
                 ImageGrid(spaceElements: 40, options: options, condition: 4,),
                 
@@ -53,17 +53,17 @@ class ExerciseTypeH1Screen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 30),
               child: CustomELevatedButton(
-                text: 'Continue',
+                text: 'Check',
                 height: 60,
                 width: width * 0.83,
                 onPressed: () async {
 
 
-                  int  note = activityController.getAnswer().last? 20: 0;
+                  int  note = activityController.getAnswer().last? 25: 0;
                     final Map<String, dynamic> data = {
                       'puntuacion': note,
                       'usuarioId': userController.getUser.usuarioId,
-                      'preguntaId': 4,
+                      'preguntaId': 1,
                       'valoracionId': 1
                     };
                      await activityService.postNewParticipation(data);

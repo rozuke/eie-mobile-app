@@ -22,9 +22,16 @@ class HomeScreen extends StatelessWidget {
     controller.setCourse = course;
     print(course.cursoId);
   }
+
+  fetchResult() async {
+    final result = await activityService.getStudentResult(controller.getUser.usuarioId);
+    activityController.setResult = result;
+    print(result);
+  }
   @override
   Widget build(BuildContext context) {
     fetchCourse();
+    fetchResult();
     return ChangeNotifierProvider(
       create: ( _ ) => _NavegationModel(),
       child: Scaffold(

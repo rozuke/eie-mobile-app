@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
 import 'package:eie_mobile_app/src/controllers/user_controller.dart';
 import 'package:eie_mobile_app/src/models/course_model.dart';
 import 'package:eie_mobile_app/src/models/user_model.dart';
@@ -7,8 +8,11 @@ import 'package:eie_mobile_app/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/services/service.dart';
 import 'package:get/get.dart';
+
+import '../models/result_model.dart';
 class ProfileScreen extends StatelessWidget {
    final userController = Get.find<UserController>();
+   final activityController  = Get.find<ActivityController>();
   ProfileScreen({Key? key}) : super(key: key);
   
   @override
@@ -40,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
             )
           ),
 
-          _ALCScoreInfo()
+          _ALCScoreInfo(result: activityController.getResult,)
           
         ],
       ),
@@ -50,10 +54,13 @@ class ProfileScreen extends StatelessWidget {
 
 
 class _ALCScoreInfo extends StatelessWidget {
-  const _ALCScoreInfo({Key? key}) : super(key: key);
+  final Result result;
+  const _ALCScoreInfo({Key? key, required this.result}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Flexible(
       child: Container(
         margin: const EdgeInsets.all(20),
@@ -63,16 +70,18 @@ class _ALCScoreInfo extends StatelessWidget {
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
-          child: Column(
+          child:   Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              ScoreCard(title: 'Laboratory', score: 80, percentage: 0.5, color: ThemeApp.skillColorLab, icon: Icons.headphones,),
+            children: [
+              
+              ScoreCard(title: 'Homework', score: result.notaHomework.toString() , percentage: (result.notaHomework! / 100), color: ThemeApp.skillColorHW, icon: Icons.create,),
               Divider(color: ThemeApp.complementaryColor,height: 2),
-              ScoreCard(title: 'Evaluation Exercise', score: 80, percentage: 0.5, color: ThemeApp.skillColorEE, icon: Icons.assignment,),
+              ScoreCard(title: 'Evaluation Exercise', score: result.notaEE.toString(), percentage: (result.notaEE! / 100), color: ThemeApp.skillColorEE, icon: Icons.assignment,),
               Divider(color: ThemeApp.complementaryColor,height: 2),
-              ScoreCard(title: 'Homework', score: 80, percentage: 0.5, color: ThemeApp.skillColorHW, icon: Icons.create,),
+              ScoreCard(title: 'Laboratory', score: result.notaLaboratory.toString(), percentage: (result.notaLaboratory! / 100), color: ThemeApp.skillColorLab, icon: Icons.headphones,),
+              
             ],
-          ),
+          )
         ),
       ),
     );

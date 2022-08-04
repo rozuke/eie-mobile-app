@@ -1,3 +1,4 @@
+import 'package:eie_mobile_app/src/models/result_model.dart';
 import 'package:eie_mobile_app/src/services/activity_service.dart';
 import 'package:eie_mobile_app/src/widgets/image_grid.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ class ActivityController extends GetxController{
   final activityService = Get.find<ActivityService>();
 
   final topics = <Forum>[].obs;
+  final results = <Result>[].obs;
   RxBool isLoading = false.obs ;
   RxBool isFirstRequest = true.obs;
   
@@ -25,6 +27,20 @@ class ActivityController extends GetxController{
   List<bool> getAnswer (){
     return answer;
   }
+
+  set setResult( Result newResult){
+    if (newResult != null){
+      results.add(newResult);
+      
+    }
+  }
+
+    
+  get getResult{
+    if (results.isNotEmpty){
+    return results.last;
+    }
+  } 
 
   set setDescription ( String value ){
     description = value;

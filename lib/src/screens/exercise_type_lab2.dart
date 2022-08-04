@@ -37,10 +37,10 @@ class ExerciseLaboratory2Screen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     List<GroupImage> options = [
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a pencil", isCorrect: true, isSelectect: false),
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a clock", isCorrect: false, isSelectect: false),
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a table", isCorrect: false, isSelectect: false),
-        GroupImage(imageURL: "https://dummyimage.com/200x180", description: "This is a door", isCorrect: false, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=13qXGEhYreMXnVhaqLrQ09Zj-6F6wSU8a", description: "Close the book", isCorrect: false, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=15oAboJLZojSGtYETF3bI_rhxOnxK3_qF", description: "Write a word", isCorrect: true, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=1QkAA0GzsnVHx5SWD5hnSJOWKLUty8-jN", description: "Go to the land", isCorrect: false, isSelectect: false),
+        GroupImage(imageURL: "https://drive.google.com/uc?export=view&id=14s_jvoHTnGyttfDaRvHPXS5nARDC0U6j", description: "Open the door", isCorrect: false, isSelectect: false),
 ];
 
     return Scaffold(
@@ -50,7 +50,7 @@ class ExerciseLaboratory2Screen extends StatelessWidget {
           const SizedBox(height: 25),
           const Text('Listen and select the correct image', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           const SizedBox(height: 30),
-          const SoundIconButton(soundUrl: 'https://sounds-mp3.com/mp3/0002368.mp3'),
+          const SoundIconButton(soundUrl: 'https://drive.google.com/uc?export=view&id=1vNMh72GcmWl8y7Wp6fkQkETY6XPaExRe'),
           const SizedBox(height: 10,),
           ImageGrid(spaceElements: 20, options: options, condition: 1,),
           const Spacer(),
@@ -62,7 +62,7 @@ class ExerciseLaboratory2Screen extends StatelessWidget {
                   width: width * 0.83,
                   onPressed: () async {
 
-                    int  note = activityController.getAnswer().last? 20: 0;
+                    int  note = activityController.getAnswer().last? 25: 0;
                     final Map<String, dynamic> data = {
                       'puntuacion': note,
                       'usuarioId': userController.getUser.usuarioId,
