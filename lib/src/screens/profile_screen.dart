@@ -1,4 +1,5 @@
 import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/models/course_model.dart';
 import 'package:eie_mobile_app/src/models/user_model.dart';
 import 'package:eie_mobile_app/src/screens/login_screen.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
@@ -7,15 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/services/service.dart';
 import 'package:get/get.dart';
 class ProfileScreen extends StatelessWidget {
-   final controller = Get.find<UserController>();
+   final userController = Get.find<UserController>();
   ProfileScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
 
-    final User user = controller.getUser;
+    final User user = userController.getUser;
     return Scaffold(
-      appBar: CustomAppBar(title: 'Profile'),
+      appBar: const CustomAppBar(title: 'Profile'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,13 +30,13 @@ class ProfileScreen extends StatelessWidget {
             )
           ),
           
-          _CourseInfo(),
+          _CourseInfo(course: userController.getCourse,),
 
           const Padding(
             padding: EdgeInsets.only(left: 10),
             child: ListTile(
               leading: Icon(Icons.newspaper, color: ThemeApp.secondaryYellowColor),
-              title: Text('Level basic books', style: TextStyle(fontSize: 18),),
+              title: Text('ALC Score', style: TextStyle(fontSize: 18),),
             )
           ),
 
@@ -55,7 +56,7 @@ class _ALCScoreInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Container(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           border: Border.all(color: ThemeApp.complementaryColor, width: 2),
           borderRadius: BorderRadius.circular(10)
@@ -64,7 +65,7 @@ class _ALCScoreInfo extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+            children: const [
               ScoreCard(title: 'Laboratory', score: 80, percentage: 0.5, color: ThemeApp.skillColorLab, icon: Icons.headphones,),
               Divider(color: ThemeApp.complementaryColor,height: 2),
               ScoreCard(title: 'Evaluation Exercise', score: 80, percentage: 0.5, color: ThemeApp.skillColorEE, icon: Icons.assignment,),
@@ -78,14 +79,12 @@ class _ALCScoreInfo extends StatelessWidget {
   }
 }
 
-class _CourseInfo extends StatefulWidget {
-  const _CourseInfo({Key? key}) : super(key: key);
+class _CourseInfo extends StatelessWidget {
 
-  @override
-  State<_CourseInfo> createState() => _CourseInfoState();
-}
+  final Course course;
+  const _CourseInfo({Key? key, required this.course}) : super(key: key);
 
-class _CourseInfoState extends State<_CourseInfo> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -106,14 +105,14 @@ class _CourseInfoState extends State<_CourseInfo> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _InfoBookCard(
-          title: 'Curren Book',
-          description: ['Book 1', 'Level 1'],
+          title: 'Current Book',
+          description: [course.libro, course.nivel],
           icon: Icons.book_outlined
         ),
         SizedBox(width: 5,),
         _InfoBookCard(
           title: 'Lessos',
-          description: ['Lesson 1', 'Bobs a Barber', 'Lesson 3', 'Lesson 4'],
+          description: course.lecciones,
           icon: Icons.chrome_reader_mode_outlined
         ),
       ],
@@ -140,11 +139,12 @@ class _InfoBookCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10)
       ),
       child: ListTile(
+        horizontalTitleGap: 0,
         leading: Icon(icon, color: ThemeApp.secondaryYellowColor),
         title: Text( title, style: TextStyle(fontSize: 16),),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: description.map((subtitle) => Text(subtitle, style: TextStyle(color: ThemeApp.secondaryBlueColor),)).toList(),
+          children: description.map((subtitle) => Text("°$subtitle", style: TextStyle(color: ThemeApp.secondaryBlueColor),)).toList(),
       )
       )
     

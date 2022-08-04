@@ -66,7 +66,7 @@ class _ExerciseLaboratory1ScreenState extends State<ExerciseLaboratory1Screen> {
               text: 'Continue',
               height: 60,
               width: width * 0.83,
-              onPressed:() => Routing.selectNextScreen(context, routeArgs) ),
+              onPressed:() => CustomRouting.selectNextScreen(context, routeArgs) ),
           )
             
         ],

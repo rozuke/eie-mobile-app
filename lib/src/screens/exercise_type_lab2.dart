@@ -1,12 +1,15 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
+import 'package:eie_mobile_app/src/widgets/custom_alert_dialog.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/routes/routing.dart';
+import 'package:get/get.dart';
 
 class ExerciseLaboratory2Screen extends StatelessWidget {
    
   static const nameRoute = '/exercise-type-lab2';
-
-  const ExerciseLaboratory2Screen({Key? key}) : super(key: key);
+  final activityController = Get.find<ActivityController>();
+  ExerciseLaboratory2Screen({Key? key}) : super(key: key);
   
 
   @override
@@ -18,24 +21,34 @@ class ExerciseLaboratory2Screen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          SafeArea(child: ProgresBar()),
-          SizedBox(height: 25),
-          Text('Listen and select the correct image', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-          SizedBox(height: 30),
-          SoundIconButton(soundUrl: 'https://sounds-mp3.com/mp3/0002368.mp3'),
-          SizedBox(height: 10,),
+          const SafeArea(child: ProgresBar()),
+          const SizedBox(height: 25),
+          const Text('Listen and select the correct image', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+          const SizedBox(height: 30),
+          const SoundIconButton(soundUrl: 'https://sounds-mp3.com/mp3/0002368.mp3'),
+          const SizedBox(height: 10,),
           ImageGrid(spaceElements: 20,),
-          Spacer(),
+          const Spacer(),
               Padding(
                 padding: EdgeInsets.only(bottom: 30),
                 child: CustomELevatedButton(
                   text: 'Continue',
                   height: 60,
                   width: width * 0.83,
-                  onPressed: () => Routing.selectNextScreen(context, routeArgs),
+                  onPressed: () => {
+                     showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) => CustomAlertDialog(
+                        description: activityController.getDescription,
+                        route: () => CustomRouting.selectNextScreen(context, routeArgs),
+                        isCorrect: activityController.getAnswer().last,
+                      )
+                    )
+                  }
                 )
               )
-            
+            // Routing.selectNextScreen(context, routeArgs),
         ],
       ),
     );

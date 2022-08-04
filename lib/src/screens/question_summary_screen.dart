@@ -44,7 +44,7 @@ class QuestionSummaryScreen extends StatelessWidget {
                   text: 'Continue',
                   height: 60,
                   width: width * 0.83,
-                  onPressed: () => Routing.backHome(context),
+                  onPressed: () => CustomRouting.backHome(context),
                 )
               )
             

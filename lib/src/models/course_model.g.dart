@@ -13,6 +13,8 @@ Course _$CourseFromJson(Map<String, dynamic> json) => Course(
       libroId: json['libroId'] as int,
       libro: json['libro'] as String,
       nivel: json['nivel'] as String,
+      lecciones:
+          (json['lecciones'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
@@ -22,4 +24,5 @@ Map<String, dynamic> _$CourseToJson(Course instance) => <String, dynamic>{
       'libroId': instance.libroId,
       'libro': instance.libro,
       'nivel': instance.nivel,
+      'lecciones': instance.lecciones,
     };

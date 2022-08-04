@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
 
 
-class Routing {
+class CustomRouting {
 
   static void selectNextScreen(BuildContext context, List<String> screens) {
 

@@ -12,7 +12,7 @@ class AppRoutes {
     ExerciseTypeEE1Screen.nameRoute: (context) => const ExerciseTypeEE1Screen(),
     ExerciseTypeEE2Screen.nameRoute: (context) => const ExerciseTypeEE2Screen(),
     ExerciseLaboratory1Screen.nameRoute: (context) => const ExerciseLaboratory1Screen(),
-    ExerciseLaboratory2Screen.nameRoute: (context) => const ExerciseLaboratory2Screen(),
+    ExerciseLaboratory2Screen.nameRoute: (context) => ExerciseLaboratory2Screen(),
     ActivitiesScreen.nameRoute: (context) =>  ActivitiesScreen(),
     ActivityForumScreen.nameRoute: (context) => ActivityForumScreen(),
     BookActivitiesScreen.nameRoute: (context) => const BookActivitiesScreen(),

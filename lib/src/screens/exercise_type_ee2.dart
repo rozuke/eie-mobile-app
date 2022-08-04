@@ -47,7 +47,7 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
                   text: 'Continue',
                   height: 60,
                   width: width * 0.83,
-                  onPressed: () => Routing.selectNextScreen(context, routeArguments),
+                  onPressed: () => CustomRouting.selectNextScreen(context, routeArguments),
                 ),
               )
             

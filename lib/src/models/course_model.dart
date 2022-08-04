@@ -24,6 +24,9 @@ class Course {
   @JsonKey(name: "nivel")
   final String nivel;
 
+  @JsonKey(name: "lecciones")
+  final List<String> lecciones;
+
 
   Course({
     required this.cursoId,
@@ -32,6 +35,7 @@ class Course {
     required this.libroId,
     required this.libro,
     required this.nivel,
+    required this.lecciones,
   });
 
   factory Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);

@@ -52,13 +52,13 @@ class _ListViewBooks extends StatelessWidget {
 
   void selectTheFirsExercise(BuildContext context){
     List<String> questionsScreen = [
-    ExerciseLaboratory1Screen.nameRoute,
+    // ExerciseLaboratory1Screen.nameRoute,
     ExerciseLaboratory2Screen.nameRoute,
     ExerciseTypeEE1Screen.nameRoute,
     ExerciseTypeEE2Screen.nameRoute,
     ExerciseTypeH1Screen.nameRoute,
     ];
-    questionsScreen.shuffle();
+    // questionsScreen.shuffle();
     final firstQuestion = questionsScreen[0] ;
     questionsScreen.remove(firstQuestion);
 
@@ -67,12 +67,12 @@ class _ListViewBooks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const List<Book> books = [
-      Book(name: 'Book 1', lessons: ['The classroom', 'Bob\'s a barber', 'Is he a teacher?','Today is Thursday'], icon: Icons.looks_one_rounded),
-      Book(name: 'Book 2', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_two_rounded),
-      Book(name: 'Book 3', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_3_rounded),
-      Book(name: 'Book 4', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_4_rounded),
-      Book(name: 'Book 5', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_5_rounded),
-      Book(name: 'Book 6', lessons: ['Lesson 1', 'Lesson 2', 'Lesson 3','Lesson 4'], icon: Icons.looks_6_rounded)
+      Book(name: 'Book 1', lessons: ['The classroom.', 'Bob\'s a barber.', 'Is he a teacher?','Today is Thursday.'], icon: Icons.looks_one_rounded),
+      Book(name: 'Book 2', lessons: ['My family is big.', 'Whose office is this?', 'Are you studying?','It\'s time for lunch.'], icon: Icons.looks_two_rounded),
+      Book(name: 'Book 3', lessons: ['He gets up early.', 'Taking a train.', 'Where are you from?','I\'m in the Army now.'], icon: Icons.looks_3_rounded),
+      Book(name: 'Book 4', lessons: ['Sports and games.', 'He\'s in the Army now.', 'Where are my clothes.','Pencils in 10 colors.'], icon: Icons.looks_4_rounded),
+      Book(name: 'Book 5', lessons: ['What\'s wrong?', 'Where can I get shampoo.', 'I\'ll take a trip.','I\'ll buy a gallon of milk'], icon: Icons.looks_5_rounded),
+      Book(name: 'Book 6', lessons: ['How\'s the weather?', 'Taking a trip.', 'Sending mail.','Let\'s take a vacation.'], icon: Icons.looks_6_rounded)
     ];
 
     
@@ -86,8 +86,8 @@ class _ListViewBooks extends StatelessWidget {
         return ListTile(
           onTap: () => selectTheFirsExercise(context),
           leading: Icon(book.icon, size: 50, color: ThemeApp.complementaryColor,),
-          title: Text(book.name),
-          subtitle: Text(book.lessons.join(', ')),
+          title: Text(book.name, style: TextStyle(fontSize: 16.5)),
+          subtitle: Text(book.lessons.join(' - ')),
           trailing: const Icon(Icons.arrow_forward_ios_rounded, color: ThemeApp.complementaryColor,)
         );
       },

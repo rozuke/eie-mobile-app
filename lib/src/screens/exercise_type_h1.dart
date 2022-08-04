@@ -19,13 +19,13 @@ class ExerciseTypeH1Screen extends StatelessWidget {
       
         children: [
               Column(
-              children: const [
-                SafeArea(child: ProgresBar()),
-                SizedBox(height: 30),
-                Text('Select the rigth picture', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-                SizedBox(height: 20),
-                _FormatText(text: 'This is a pencil',),
-                SizedBox(height: 40),
+              children: [
+                const SafeArea(child: ProgresBar()),
+                const SizedBox(height: 30),
+                const Text('Select the rigth picture', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                const SizedBox(height: 20),
+                const _FormatText(text: 'This is a pencil',),
+                const SizedBox(height: 40),
                 ImageGrid(spaceElements: 40,),
                 
               ],
@@ -37,7 +37,7 @@ class ExerciseTypeH1Screen extends StatelessWidget {
                 text: 'Continue',
                 height: 60,
                 width: width * 0.83,
-                onPressed: () => Routing.selectNextScreen(context, routeArguments),
+                onPressed: () => CustomRouting.selectNextScreen(context, routeArguments),
               ),
             )
         ],
