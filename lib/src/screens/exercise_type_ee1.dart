@@ -1,11 +1,33 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/services/activity_service.dart';
+import 'package:eie_mobile_app/src/widgets/custom_alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/routes/routing.dart';
+import 'package:get/get.dart';
 import '../widgets/widgets.dart';
 
 class ExerciseTypeEE1Screen extends StatelessWidget {
   static String nameRoute = '/exercise-type-ee1';
-  const ExerciseTypeEE1Screen({Key? key}) : super(key: key);
+  final activityController = Get.find<ActivityController>();
+  final userController = Get.find<UserController>();
+  final activityService = Get.find<ActivityService>();
+  ExerciseTypeEE1Screen({Key? key}) : super(key: key);
+
+
+  void labelAction (bool isCorrect, String description) {
+    if (activityController.answer.length < 2) {
+      activityController.setAnswer(isCorrect);
+    } else {
+      activityController.getAnswer().removeLast();
+      activityController.setAnswer(isCorrect);
+    }
+    activityController.setDescription = description;
+
+    print(activityController.answer.length);
+    print(description );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -15,10 +37,10 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          SafeArea(child: ProgresBar()),
-          SizedBox(height: 30),
-          Text('Complete the sentence', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-          SizedBox(height: 100),
+          const SafeArea(child: ProgresBar(percent: 0.5,)),
+          const SizedBox(height: 30),
+          const Text('Complete the sentence', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+          const SizedBox(height: 100),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -38,11 +60,14 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
           ),
           
           SizedBox(height: 100),
-          LabelButton(text: 'mark', isAdjustable: false, ),
+          LabelButton(text: 'mark', isAdjustable: false,
+            onPressed: () => labelAction(false, "Something Peter mark the wrong answer on a test" )),
           SizedBox(height: 15),
-          LabelButton(text: 'marks', isAdjustable: false,),
+          LabelButton(text: 'marks', isAdjustable: false,
+          onPressed: () => labelAction(true, "Something Peter marks the wrong answer on a test" )),
           SizedBox(height: 15),
-          LabelButton(text: 'to mark', isAdjustable: false,),
+          LabelButton(text: 'to mark', isAdjustable: false,
+          onPressed:() => labelAction(false, "Something Peter to mark the wrong answer on a test" )),
           Spacer(),
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
@@ -50,7 +75,26 @@ class ExerciseTypeEE1Screen extends StatelessWidget {
               text: 'Continue',
               height: 60,
               width: width * 0.83,
-              onPressed: () => CustomRouting.selectNextScreen(context, routeArguments)
+              onPressed: () async {
+
+                int  note = activityController.getAnswer().last? 20: 0;
+                    final Map<String, dynamic> data = {
+                      'puntuacion': note,
+                      'usuarioId': userController.getUser.usuarioId,
+                      'preguntaId': 4,
+                      'valoracionId': 1
+                    };
+                     await activityService.postNewParticipation(data);
+               showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context) => CustomAlertDialog(
+                  description: activityController.getDescription,
+                  route: () => CustomRouting.selectNextScreen(context, routeArguments),
+                  isCorrect: activityController.getAnswer().last,
+                )
+               );
+             }
             ),
           )
             

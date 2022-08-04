@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ProgresBar extends StatelessWidget {
-  const ProgresBar({Key? key}) : super(key: key);
+  final double percent;
+  const ProgresBar({Key? key, required this.percent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

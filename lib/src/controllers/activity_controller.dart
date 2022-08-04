@@ -13,10 +13,12 @@ class ActivityController extends GetxController{
   RxBool isFirstRequest = true.obs;
   
   List<bool> answer = [];
+  int rightAnswers = 0;
   String description = '';
 
   void setAnswer ( bool value ){
     answer.add(value);
+    value? rightAnswers++ : null;
     update();
   }
 
@@ -53,20 +55,4 @@ class ActivityController extends GetxController{
   hideLoading() {
     isLoading.toggle();
   }
-}
-
-class GroupImage {
-  final String? imageURL;
-  final String? description;
-  final bool? isCorrect;
-  final bool? isSelectect;
-
-  GroupImage({
-    this.imageURL,
-    this.description,
-    this.isCorrect,
-    this.isSelectect,
-  });
-
-
 }

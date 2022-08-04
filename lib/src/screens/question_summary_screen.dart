@@ -1,20 +1,28 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/routes/routing.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
+import 'package:get/get.dart';
 
 
 class QuestionSummaryScreen extends StatelessWidget {
 
   static const nameRoute = '/question-summary'; 
-  
-  const QuestionSummaryScreen({Key? key}) : super(key: key);
+  final activityController = Get.find<ActivityController>();
+  QuestionSummaryScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+
+    // var questions = activityController.getAnswer().map((e) => e ? 1 : 0).reduce((a, b) => a + b) as int;
+    int questions = activityController.rightAnswers;
+    final finalScore = (questions * 25).round();
+    print(questions);
+
     return Scaffold(
-      appBar: CustomAppBar(title: 'Questions Summary'),
+      appBar: const CustomAppBar(title: 'Questions Summary'),
       body: Column(
         children: [
           const SizedBox(height: 50,),
@@ -31,15 +39,15 @@ class QuestionSummaryScreen extends StatelessWidget {
           const SizedBox(height: 90),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                _BoxInfo(title: 'Questions', score: 5, color: ThemeApp.secondaryBlueColor),
-                _BoxInfo(title: 'Correct', score: 4, color: ThemeApp.secondaryYellowColor),
-                _BoxInfo(title: 'Final Score', score: 80, color: ThemeApp.complementaryColor),
+              children: [
+                _BoxInfo(title: 'Questions', score: activityController.getAnswer().length, color: ThemeApp.secondaryBlueColor),
+                _BoxInfo(title: 'Correct', score: questions, color: ThemeApp.secondaryYellowColor),
+                _BoxInfo(title: 'Final Score', score: finalScore, color: ThemeApp.complementaryColor),
               ],
             ),
-            Spacer(),
+            const Spacer(),
               Padding(
-                padding: EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 30),
                 child: CustomELevatedButton(
                   text: 'Continue',
                   height: 60,
@@ -57,11 +65,11 @@ class QuestionSummaryScreen extends StatelessWidget {
 class _BoxInfo extends StatelessWidget {
 
   final String title;
-  final int score;
+  final int? score;
   final Color color;
   const _BoxInfo({Key? key,
     required this.title,
-    required this.score,
+    this.score,
     required this.color}) : super(key: key);
 
   @override

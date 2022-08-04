@@ -12,6 +12,7 @@ class CustomAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return AlertDialog(
+      insetPadding: EdgeInsets.symmetric(horizontal: 50),
       title: ListTile(
       leading: isCorrect
           ? Icon( Icons.check, color: Colors.green,)

@@ -42,4 +42,14 @@ class ActivityService {
       rethrow;
     }
   }
+
+  Future<Response> postNewParticipation(Map<String, dynamic> data) async {
+    try{
+      final Response response = await _httpClient.postActivityRequest("/activity/user/student/participation",
+      data);
+      return response;
+    }on Exception catch (e) {
+      rethrow;
+    }
+  }
 }
