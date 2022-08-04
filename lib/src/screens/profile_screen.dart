@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           _ProfileInfo(user: user),
           
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 10),
             child: ListTile(
               leading: Icon(Icons.newspaper, color: ThemeApp.secondaryYellowColor),
@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
           
           _CourseInfo(),
 
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(left: 10),
             child: ListTile(
               leading: Icon(Icons.newspaper, color: ThemeApp.secondaryYellowColor),

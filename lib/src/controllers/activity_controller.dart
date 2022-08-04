@@ -10,6 +10,8 @@ class ActivityController extends GetxController{
   final topics = <Forum>[].obs;
   RxBool isLoading = false.obs ;
   RxBool isFirstRequest = true.obs;
+  final activityId = 0.obs;
+
   set setForums(List<Forum> forums){
     showLoading();
     topics.addAll(forums);

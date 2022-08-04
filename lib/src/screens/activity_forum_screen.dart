@@ -36,16 +36,27 @@ class ActivityForumScreen extends StatelessWidget {
     fetchForumTopics();
     print(activityController.topics.length);
     return Scaffold(
-      appBar: CustomAppBar(title: 'Forums'),
+      appBar: const CustomAppBar(title: 'Forums'),
       body: Obx(() {
 
         return activityController.isLoading.isTrue
-        ? const Center(child: CircularProgressIndicator())
+        ? const Center(
+          heightFactor: 40,
+          child: CircularProgressIndicator()
+          )
         : ListView.separated(
           itemCount: activityController.topics.length,
           itemBuilder: ( _ , index) => _ForumCard(
             forum: activityController.topics[index],
-            onPressed: () => viewCommentsForum(context),
+            onPressed: () async {
+              final data = await activityService.getComments(userController.getCourse.cursoId, activityController.topics[index].actividadId);
+              
+              Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ForumCommentsScreen(data: data ),
+              ));
+            },
           ), 
           separatorBuilder: ( _ , __ ) => const Divider(indent: 20, endIndent: 20,), 
         );

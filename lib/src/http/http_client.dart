@@ -33,6 +33,17 @@ class HttpClient {
     }
   }
 
+  Future<Response> postActivityRequest( String url, Map<String, dynamic> body ) async {
+    Response response;
+    try{
+      response = await _dio.post("$_baseActivityURL/$url", data: body);
+      return response;
+    }on DioError catch (e) {
+      print(e.message);
+      throw Exception(e.message);
+    }
+  }
+
   initializeInterceptors(){
     _dio.interceptors.add(InterceptorsWrapper(
       onError: (e, _ ) => {

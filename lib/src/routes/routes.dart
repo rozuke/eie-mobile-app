@@ -16,7 +16,7 @@ class AppRoutes {
     ActivitiesScreen.nameRoute: (context) =>  ActivitiesScreen(),
     ActivityForumScreen.nameRoute: (context) => ActivityForumScreen(),
     BookActivitiesScreen.nameRoute: (context) => const BookActivitiesScreen(),
-    ForumCommentsScreen.nameRoute: (context) => const ForumCommentsScreen(),
+    // ForumCommentsScreen.nameRoute: (context) => ForumCommentsScreen(),
     QuestionSummaryScreen.nameRoute: (context) => const QuestionSummaryScreen(),
     
   };
