@@ -1,13 +1,22 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
+import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:eie_mobile_app/src/data/group_image.dart';
 
 
 class ImageGrid extends StatelessWidget {
   final double spaceElements;
-  const ImageGrid({Key? key, required this.spaceElements}) : super(key: key);
+  final int condition;
+  final List<GroupImage> options;
+  final activityController = Get.find<ActivityController>();
+  ImageGrid({Key? key, required this.spaceElements, required this.options, required this.condition}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    
+
+  
+      
       return GridView.builder(
         shrinkWrap: true,
         primary: false,
@@ -18,61 +27,36 @@ class ImageGrid extends StatelessWidget {
 
         ),
         padding: EdgeInsets.symmetric(horizontal: spaceElements / 2),
-        itemCount: 4,
-        itemBuilder: ( _ , index) => SizedBox(
-          width: 200,
-          height: 180,
-              child: FadeInImage(
-                image:  NetworkImage('https://dummyimage.com/200x180'),
-                placeholder: AssetImage('assets/loading-loader.gif')),
+        itemCount: options.length,
+        itemBuilder: ( _ , index) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey, width: 1),
+            borderRadius: BorderRadius.circular(20)
+          ),
+          margin: EdgeInsets.all(spaceElements / 2),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+        
+            child: GestureDetector(
+              onTap: () {
+                
+                if (activityController.answer.length < condition) {
+                  activityController.setAnswer(options[index].isCorrect);
+          
+                } else {
+                  activityController.getAnswer().removeLast();
+                  activityController.setAnswer(options[index].isCorrect);
+                }
+                activityController.setDescription = options[index].description;
+          
+              },
+              child: InkWell(
+                highlightColor: ThemeApp.secondaryYellowColor.withOpacity(0.3),
+                child: Image.network(options[index].imageURL,width: 200, height: 180, fit: BoxFit.fill,),
+              ),
             ),
-      );
+          ),
+        ));
+   
   }
 }
-
-
-
-// Column(
-//       children: [
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           children:const [
-//             SizedBox(
-//               height: 180,
-//               width: 200,
-//               child: FadeInImage(
-//                 image:  NetworkImage('https://dummyimage.com/200x180'),
-//                 placeholder: AssetImage('assets/loading-loader.gif')),
-//             ),
-//             SizedBox(
-//               height: 180,
-//               width: 200,
-//               child: FadeInImage(
-//                 image:  NetworkImage('https://dummyimage.com/200x180'),
-//                 placeholder: AssetImage('assets/loading-loader.gif')),
-//             )
-//           ],
-//         ),
-
-//         const SizedBox(height: 40),
-
-//         Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//           children:const [
-//             SizedBox(
-//               height: 180,
-//               width: 200,
-//               child: FadeInImage(
-//                 image:  NetworkImage('https://dummyimage.com/200x180'),
-//                 placeholder: AssetImage('assets/loading-loader.gif')),
-//             ),
-//             SizedBox(
-//               height: 180,
-//               width: 200,
-//               child: FadeInImage(
-//                 image:  NetworkImage('https://dummyimage.com/200x180'),
-//                 placeholder: AssetImage('assets/loading-loader.gif')),
-//             )
-//           ],
-//         )
-//     ]);

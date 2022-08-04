@@ -6,25 +6,25 @@ import 'package:eie_mobile_app/src/screens/screens.dart';
 class AppRoutes {
 
   static  Map<String, Widget Function(BuildContext)> routes = {
-    LoginScreen.nameRoute: (context) => const LoginScreen(),
-    HomeScreen.nameRoute: (context) => const HomeScreen(),
-    ExerciseTypeH1Screen.nameRoute: (context) => const ExerciseTypeH1Screen(),
-    ExerciseTypeEE1Screen.nameRoute: (context) => const ExerciseTypeEE1Screen(),
-    ExerciseTypeEE2Screen.nameRoute: (context) => const ExerciseTypeEE2Screen(),
+    LoginScreen.nameRoute: (context) => LoginScreen(),
+    HomeScreen.nameRoute: (context) => HomeScreen(),
+    ExerciseTypeH1Screen.nameRoute: (context) => ExerciseTypeH1Screen(),
+    ExerciseTypeEE1Screen.nameRoute: (context) => ExerciseTypeEE1Screen(),
+    ExerciseTypeEE2Screen.nameRoute: (context) => ExerciseTypeEE2Screen(),
     ExerciseLaboratory1Screen.nameRoute: (context) => const ExerciseLaboratory1Screen(),
-    ExerciseLaboratory2Screen.nameRoute: (context) => const ExerciseLaboratory2Screen(),
-    ActivitiesScreen.nameRoute: (context) => const ActivitiesScreen(),
-    ActivityForumScreen.nameRoute: (context) => const ActivityForumScreen(),
+    ExerciseLaboratory2Screen.nameRoute: (context) => ExerciseLaboratory2Screen(),
+    ActivitiesScreen.nameRoute: (context) =>  ActivitiesScreen(),
+    ActivityForumScreen.nameRoute: (context) => ActivityForumScreen(),
     BookActivitiesScreen.nameRoute: (context) => const BookActivitiesScreen(),
-    ForumCommentsScreen.nameRoute: (context) => const ForumCommentsScreen(),
-    QuestionSummaryScreen.nameRoute: (context) => const QuestionSummaryScreen(),
+    // ForumCommentsScreen.nameRoute: (context) => ForumCommentsScreen(),
+    QuestionSummaryScreen.nameRoute: (context) => QuestionSummaryScreen(),
     
   };
 
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(
-      builder: (context) => const LoginScreen()
+      builder: (context) => LoginScreen()
     );
   }
 

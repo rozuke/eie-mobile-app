@@ -1,14 +1,33 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/services/activity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
 import 'package:eie_mobile_app/src/routes/routing.dart';
+import 'package:get/get.dart';
+
+import '../widgets/custom_alert_dialog.dart';
 
 class ExerciseTypeEE2Screen extends StatelessWidget {
   
   static const nameRoute = '/exercise-type-ee2';
-
-  const ExerciseTypeEE2Screen({Key? key}) : super(key: key);
+  final activityController = Get.find<ActivityController>();
+  final userController = Get.find<UserController>();
+  final activityService = Get.find<ActivityService>();
+  ExerciseTypeEE2Screen({Key? key}) : super(key: key);
   
+
+  void labelAction (bool isCorrect, String description) {
+    if (activityController.answer.length < 3) {
+      activityController.setAnswer(isCorrect);
+    } else {
+      activityController.getAnswer().removeLast();
+      activityController.setAnswer(isCorrect);
+    }
+    activityController.setDescription = description;
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -17,37 +36,59 @@ class ExerciseTypeEE2Screen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          SafeArea( child: ProgresBar()),
-          SizedBox(height: 30),
-          Text('Complete the dialog', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-          SizedBox(height: 30),
-              Align(
+          const SafeArea( child: ProgresBar(percent: 0.75,)),
+          const SizedBox(height: 30),
+          const Text('Complete the dialog', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+          const SizedBox(height: 30),
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: _BoxMeessage(
                   isLeft: true,
-                  message: 'Who wa in the classroom this morning?')
+                  message: 'Who was in the classroom this morning?')
                 ),
-              Align(
+              const Align(
                 alignment: Alignment.centerRight,
                 child: _BoxMeessage(
                   isLeft: false,
                   message: ''),   
                 ),
 
-              SizedBox(height: 20),
-              LabelButton(text: 'It was the teacher', isAdjustable: false),
-              SizedBox(height: 20),
-              LabelButton(text: 'It\'s was the teacher', isAdjustable: false,),
-              SizedBox(height: 20),
-              LabelButton(text: 'There is she is', isAdjustable: false,),
+              const SizedBox(height: 20),
+              LabelButton(text: 'It was the teacher', isAdjustable: false,
+                onPressed: ()=> labelAction(true, "It was the teacher")),
+              const SizedBox(height: 20),
+              LabelButton(text: 'It\'s was the teacher', isAdjustable: false,
+                onPressed: ()=> labelAction(false, "It's was the teacher")),
+              const SizedBox(height: 20),
+              LabelButton(text: 'There is she is', isAdjustable: false,
+                onPressed: ()=> labelAction(false, "There is she is")),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: CustomELevatedButton(
-                  text: 'Continue',
+                  text: 'Check',
                   height: 60,
                   width: width * 0.83,
-                  onPressed: () => Routing.selectNextScreen(context, routeArguments),
+                  onPressed: () async{
+
+                    int  note = activityController.getAnswer().last? 25: 0;
+                    final Map<String, dynamic> data = {
+                      'puntuacion': note,
+                      'usuarioId': userController.getUser.usuarioId,
+                      'preguntaId': 3,
+                      'valoracionId': 1
+                    };
+                     await activityService.postNewParticipation(data);
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) => CustomAlertDialog(
+                        description: activityController.getDescription,
+                        route: () => CustomRouting.selectNextScreen(context, routeArguments),
+                        isCorrect: activityController.getAnswer().last,
+                )
+               );
+                  },
                 ),
               )
             

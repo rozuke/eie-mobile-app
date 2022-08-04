@@ -4,12 +4,22 @@ import 'package:flutter/material.dart';
 class UserInfo extends StatelessWidget {
   final String userName;
   final String userRol;
-  final String textAvatar;
 
   const UserInfo({Key? key,
     required this.userName,
     required this.userRol,
-    required this.textAvatar}) : super(key: key);
+    }) : super(key: key);
+
+
+  String getChartsForAvatar (String name) {
+    var value = name.split(" ");
+    if (value.length > 1) {
+      return "${value[0][0]}${value[1][0]}";
+    } else {
+      return value[0][0];
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +28,7 @@ class UserInfo extends StatelessWidget {
         ListTile(
           leading: CircleAvatar(
             backgroundColor: Colors.lightBlue[400],
-            child: Text(textAvatar, style: TextStyle(color: Colors.white)),
+            child: Text(getChartsForAvatar(userName), style: TextStyle(color: Colors.white)),
           ),
           title: Text(userName),
           subtitle: Text(userRol),

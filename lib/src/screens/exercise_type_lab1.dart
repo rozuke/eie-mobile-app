@@ -43,7 +43,7 @@ class _ExerciseLaboratory1ScreenState extends State<ExerciseLaboratory1Screen> {
     return Scaffold(
       body: Column(
         children: [
-          SafeArea(child: ProgresBar()),
+          // SafeArea(child: ProgresBar()),
           SizedBox(height: 30),
           Text('Listen and write the sentence', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           SizedBox(height: 30),
@@ -66,7 +66,7 @@ class _ExerciseLaboratory1ScreenState extends State<ExerciseLaboratory1Screen> {
               text: 'Continue',
               height: 60,
               width: width * 0.83,
-              onPressed:() => Routing.selectNextScreen(context, routeArgs) ),
+              onPressed:() => CustomRouting.selectNextScreen(context, routeArgs) ),
           )
             
         ],
@@ -108,7 +108,7 @@ class _GridLabels extends StatelessWidget {
         ''',
         columnSizes: [auto, auto, auto],
         rowSizes: [auto, auto, auto],
-        children: labels.map((label) => LabelButton(text: label.text, isAdjustable: true).inGridArea('L${label.pos}')).toList(),
+        children: labels.map((label) => LabelButton(text: label.text, isAdjustable: true, onPressed: (){}).inGridArea('L${label.pos}')).toList(),
         ),
     );
     

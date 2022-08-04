@@ -1,10 +1,16 @@
 import 'package:eie_mobile_app/src/routes/routes.dart';
 import 'package:eie_mobile_app/src/screens/launcher_temp.dart';
+import 'package:eie_mobile_app/src/services/question_provider.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/screens/screens.dart';
+import 'package:get/get.dart';
 
-void main() => runApp(const MyApp());
+void main() { 
+
+  // Get.put(QuestionProvider() );
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

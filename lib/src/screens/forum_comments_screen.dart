@@ -1,45 +1,52 @@
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/models/comment_model.dart';
+import 'package:eie_mobile_app/src/models/comment_response_model.dart';
+import 'package:eie_mobile_app/src/models/forum_model.dart';
+import 'package:eie_mobile_app/src/services/activity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
+import 'package:get/get.dart';
 
 class ForumCommentsScreen extends StatelessWidget {
-  
+
+  final CommentResponse data;
   static const nameRoute = '/forum-comments';
 
-  const ForumCommentsScreen({Key? key}) : super(key: key);
+  ForumCommentsScreen({Key? key, required this.data}) : super(key: key);
   
   
 
   @override
   Widget build(BuildContext context) {
+   
 
-    final List<String> comments = [
-      'Esse voluptate commodo adipisicing  Qui velit ut ut cupidatat proident ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-      'Esse voluptate laborum deserunt minim. Magna voluptate excepteur commodo sint. Qui velit ut ut cupidatat proident ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-      'Esse voluptate commodo adipisicing labore nostrud sit eiusmod ullamco amet laborum deserunt minim. Magna voluptate excepteur commodo sint. Qui velit ut ut cupidatat proident ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-      'Esse voluptate ut cupidatat proident ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-      'Esse voluptate ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-      'Esse voluptate commodo adipisicing labore nostrud sit eiusmod ullamco amet laborum deserunt minim. Magna voluptate excepteur commodo sint. Qui velit ut ut cupidatat proident ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-      'Esse voluptate commodo adipisicing labore nostrud sit eiusmod ullamco amet laborum deserunt minim. Magna voluptate excepteur commodo sint. Qui velit ut ut cupidatat proident ex labore. Velit proident anim cupidatat sint sunt reprehenderit. Lorem sit dolore mollit ullamco veniam ea labore ex. Consequat veniam nostrud magna non esse laborum deserunt duis est amet aute minim.',
-  ];
+    if (data.comentarios.isEmpty) {
+      return Scaffold(
+        body: Center(
+        child: Text('No comments yet'),
+      )
+      ) ;
+    }
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
           SingleChildScrollView(
           child: Column(
             children: [
-              SafeArea(child: _BoxTopic(title: 'Study by day or at night', description: 'Non tempor nulla incididunt veniam. Deserunt veniam minim laboris id adipisicing aliquip reprehenderit. Excepteur cupidatat id aliquip deserunt id incididunt incididunt ad laborum esse. Ut sunt ad amet pariatur aliqua labore duis qui elit.')),
+              SafeArea(child: _BoxTopic(forum: data.foro,)),
           
               ConstrainedBox(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                 minHeight: 100
                   ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: comments.map((comment) => _BoxComment(comment: comment)).toList(),
+                  children: data.comentarios.map((comment) => _BoxComment(comment: comment)).toList(),
                 ),
               ),
-              SizedBox(height: 80,)  // ListView.builder( //   itemBuilder: itemBuilder),
+              const SizedBox(height: 80,)  // ListView.builder( //   itemBuilder: itemBuilder),
               ],
             ),
           ),
@@ -48,33 +55,58 @@ class ForumCommentsScreen extends StatelessWidget {
           right: 0,
           left: 0,
           bottom: 0,
-          child: _BoxMessage()
+          child: _BoxMessage(acitivityId: data.foro.actividadId,)
         ),
         ],
-      ),
+      )
+
       );
   }
 }
 
-class _BoxMessage extends StatefulWidget {
-  _BoxMessage({Key? key}) : super(key: key);
+class _BoxMessage extends StatelessWidget {
+  
+  final int acitivityId;
+  final activityService = Get.find<ActivityService>();
+  final userController = Get.find<UserController>();
+  _BoxMessage({Key? key, required this.acitivityId}) : super(key: key);
 
-  @override
-  State<_BoxMessage> createState() => __BoxMessageState();
-}
 
-class __BoxMessageState extends State<_BoxMessage> {
+TextEditingController commentController = TextEditingController();
+  
+  
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
       color: Colors.grey[200],
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _InputComment(hintText: 'Type your opinion', inputType: TextInputType.text, ),
+          _InputComment(hintText: 'Type your opinion',
+            inputType: TextInputType.text,
+            controller: commentController,
+          ),
           MaterialButton(
-            onPressed: (){},
+            onPressed: () async {
+              String comment = commentController.text;
+              if(comment.isNotEmpty) {
+                final courseId = userController.getCourse.cursoId;
+                final userId = userController.getUser.usuarioId;
+                final Map<String, dynamic> data = {
+                  'contenido': comment,
+                  'usuarioId': userId,
+                  'actividadId': acitivityId,
+                };
+                final response = activityService.postComment( courseId, acitivityId, data );
+                
+                if(response != null) {
+                  await activityService.getComments(courseId, acitivityId);
+                  commentController.clear();
+                }
+                
+              }
+            },
             color: ThemeApp.primaryBlueColor,
             shape: CircleBorder(),
             padding: EdgeInsets.all(10),
@@ -88,15 +120,15 @@ class __BoxMessageState extends State<_BoxMessage> {
 
 
 class _BoxTopic extends StatelessWidget {
-  final String title;
-  final String description;
-  const _BoxTopic({Key? key,
-    required this.title,
-    required this.description}) : super(key: key);
+  Forum forum;
+  _BoxTopic({Key? key,
+    required this.forum
+    }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       padding: EdgeInsets.only(bottom: 20),
       margin: EdgeInsets.only(bottom: 30),
       decoration: BoxDecoration(
@@ -113,28 +145,30 @@ class _BoxTopic extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UserInfo(
-          userName: 'Gabriel Gongora',
-          userRol: 'Teacher',
-          textAvatar: 'J',
-        ),
-
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: ThemeApp.complementaryColor),),
-              SizedBox(height: 10,),
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(description,
-                                style: TextStyle(color: ThemeApp.primaryBlueColor),)
-                  ),
-                ] 
-              ),      
-            ],
+        //   UserInfo(
+        //   userName: 'Gabriel Gongora',
+        //   userRol: 'Teacher',
+        //   textAvatar: 'J',
+        // ),
+        const SizedBox(height: 30,),
+        SafeArea(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(forum.topico, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: ThemeApp.complementaryColor),),
+                const SizedBox(height: 10,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(forum.descripcion,
+                                  style: const TextStyle(color: ThemeApp.primaryBlueColor),)
+                    ),
+                  ] 
+                ),      
+              ],
+            ),
           ),
         ),
         
@@ -145,12 +179,13 @@ class _BoxTopic extends StatelessWidget {
 }
 
 class _BoxComment extends StatelessWidget {
-  final String comment;
+  final Comment comment;
   const _BoxComment({Key? key,
     required this.comment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       
       padding: EdgeInsets.only(bottom: 10),
@@ -169,9 +204,8 @@ class _BoxComment extends StatelessWidget {
       child: Column(
         children: [
           UserInfo(
-          userName: 'Juan Perez',
+          userName: comment.nombre,
           userRol: 'Student',
-          textAvatar: 'J',
         ),
 
         Container(
@@ -183,7 +217,7 @@ class _BoxComment extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(comment,)
+                      child: Text(comment.contenido)
                     ),
                     
                   ] 
@@ -201,12 +235,14 @@ class _InputComment extends StatelessWidget {
 
   final String hintText;
   final TextInputType inputType;
+  final TextEditingController controller;
   
   
   const _InputComment({
     Key? key,
     required this.hintText,
     required this.inputType,
+    required this.controller,
     }) : super(key: key);
 
   @override
@@ -216,6 +252,7 @@ class _InputComment extends StatelessWidget {
             width: width * 0.8,
             child: TextFormField(
               autocorrect: false,
+              controller: controller,
               keyboardType: inputType,
               decoration: _InputDecorations.inputLoginDecoration(
                 hintText: hintText,

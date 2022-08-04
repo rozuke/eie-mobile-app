@@ -1,39 +1,46 @@
+import 'package:eie_mobile_app/src/controllers/activity_controller.dart';
+import 'package:eie_mobile_app/src/controllers/user_controller.dart';
+import 'package:eie_mobile_app/src/models/forum_model.dart';
+import 'package:eie_mobile_app/src/screens/activity_forum_screen.dart';
 import 'package:eie_mobile_app/src/screens/book_activities_screen.dart';
+import 'package:eie_mobile_app/src/services/activity_service.dart';
 import 'package:eie_mobile_app/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:eie_mobile_app/src/widgets/widgets.dart';
+import 'package:get/get.dart';
 
 class ActivitiesScreen extends StatelessWidget {
   static const nameRoute = '/activities';
-   
-  const ActivitiesScreen({Key? key}) : super(key: key);
+
+  final activityService = Get.find<ActivityService>();
+  final activityController = Get.find<ActivityController>();
+  final userController = Get.find<UserController>(); 
+  ActivitiesScreen({Key? key}) : super(key: key);
   
+
+  // goToForumTopics() {
+  //   activityController.loadForumTopics(userController.getCourse.cursoId);
+  //   return true;
+  // }
+
   @override
   Widget build(BuildContext context) {
 
     List<Chanel> chanels = [
-      Chanel(title: 'B1', name: 'Book 1 activities'),
-      Chanel(title: 'B2', name: 'Book 2 activities'),
-      Chanel(title: 'B3', name: 'Book 3 activities'),
-      Chanel(title: 'B4', name: 'Book 4 activities'),
-      Chanel(title: 'B5', name: 'Book 5 activities'),
-      Chanel(title: 'B6', name: 'Book 6 activities'),
-      Chanel(title: 'B6', name: 'Book 6 activities'),
+      Chanel(title: 'Forum', name: 'Forum'),
     ];
 
-
+    var course = userController.getCourse;
     return Scaffold(
-      appBar: CustomAppBar(title: 'Activities'),
+      appBar: const CustomAppBar(title: 'Activities'),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 30,),
-            Row(
-              children: [
-                SizedBox(width: 20),
-                Icon(Icons.list_alt_outlined, color: ThemeApp.primaryYellowColor, size: 40),
-                Text('Basic level course', style: TextStyle(fontSize: 16),)
-              ],
+            const SizedBox(height: 20),
+            ListTile(
+              leading: const Icon(Icons.list_alt_outlined, color: ThemeApp.secondaryYellowColor, size: 40,),
+              title: Text(course.nombre, style: TextStyle(fontSize: 18)),
+              subtitle: Text(course.libro),
             ),
             GridView.builder(
               shrinkWrap: true,
@@ -43,12 +50,15 @@ class ActivitiesScreen extends StatelessWidget {
                 crossAxisSpacing: 30,
                 mainAxisSpacing: 30,
               ),
-              padding: const EdgeInsets.all(30),
+              padding: const EdgeInsets.all(40),
               itemCount: chanels.length,
               itemBuilder: ( _ , index) => _CardChanel(
                 title: chanels[index].title,
                 name: chanels[index].name,
-                onPressed: () => {Navigator.pushNamed(context, BookActivitiesScreen.nameRoute)},
+                onPressed: () {
+                  
+                  Navigator.pushNamed(context, ActivityForumScreen.nameRoute);
+                },
               ),
             )
           ],
@@ -62,7 +72,7 @@ class ActivitiesScreen extends StatelessWidget {
 class _CardChanel extends StatelessWidget {
   final String title;
   final String name;
-  final void Function() onPressed;
+  final Function() onPressed;
   const _CardChanel({
     Key? key,
     required this.title,
@@ -88,17 +98,19 @@ class _CardChanel extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              height: size * 0.7,
-              width: size * 0.7,
+              height: size * 0.9,
+              width: size * 0.9,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: ThemeApp.secondaryBlueColor,
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(10),
               ),
               
-              child: Text(title, style: TextStyle(fontSize: 24, color: Colors.white)),
+              child: Image.asset(
+                'assets/logos/foro-logo.png',
+              ),
             ),
-            Text(name, style: TextStyle(fontSize: 14))
+            Text(name, style: TextStyle(fontSize: 16, color: ThemeApp.primaryBlueColor),),
           ],
         )
       ),
@@ -112,6 +124,7 @@ class Chanel {
 
   Chanel({
     required this.title,
-    required this.name});
+    required this.name,
+    });
 
 }
