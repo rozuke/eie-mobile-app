@@ -13,28 +13,28 @@ The underlying architecture of the English learning platform is a robust microse
 
 The architecture consists of three fundamental microservices:
 
-1. **Course Microservice: **This microservice handles the management of English courses, including course creation, updates, and deletions. It allows users to access learning content in an organized manner.
+1. **Course Microservice:** This microservice handles the management of English courses, including course creation, updates, and deletions. It allows users to access learning content in an organized manner.
 
-2. **User Microservice: **The User microservice is responsible for managing student, teacher, and other accounts involved in the platform. It handles user authentication and authorization.
+2. **User Microservice:** The User microservice is responsible for managing student, teacher, and other accounts involved in the platform. It handles user authentication and authorization.
 
-3. ** Activity Microservice: **This microservice focuses on interactive learning activities. It provides dynamic content and tracks student progress as they advance in their English learning.
+3. **Activity Microservice:** This microservice focuses on interactive learning activities. It provides dynamic content and tracks student progress as they advance in their English learning.
 
 ### Diagram
 
-![Diagram](./readme-images/diagram.png)
+![Diagram](readme-images/diagram.PNG)
 
 ## Screenshots
 
 ### Login
 
-![Login](./readme-images/login.png)
+![Login](readme-images/login.PNG)
 
 ### Home Screen
 
-![Home](./readme-images/home.png)
+![Home](readme-images/home.PNG)
 
 ### Activities Screen
 
-![Activities 1](./readme-images/activities1.png)
-![Activities 2](./readme-images/activities2.png)
-![Activities 3](./readme-images/activities3.png)
+![Activities 1](readme-images/activities1.PNG)
+![Activities 2](readme-images/activities2.PNG)
+![Activities 3](readme-images/activities3.PNG)
